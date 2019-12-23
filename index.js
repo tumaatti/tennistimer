@@ -7,12 +7,12 @@
  */
 
 // set keycodes for eventListener
-const r = 82;
-const a = 65;
-const z = 90;
-const x = 88;
-const s = 83;
 const enter = 13;
+const home = 36;
+const pgup = 33;
+const pgdn = 34;
+const end = 5;
+const del = 46;
 
 let TIEBREAK = false;
 let currentRound = 0;
@@ -69,11 +69,11 @@ document.addEventListener("keydown", function(event) {
   console.log(event.keyCode);
 
   if (!TIEBREAK) {
-    if (event.keyCode === r) { // keyCode == "r"
+    if (event.keyCode === del) { // keyCode == "r"
       resetPointsToZero();
     }
 
-    else if (event.keyCode === a) { // add point to player1 player
+    else if (event.keyCode === home) { // add point to player1 player
       if (player1Points === "0") {
         document.getElementById("player1-points").innerHTML = "15";
       } else if (player1Points === "15") {
@@ -94,7 +94,7 @@ document.addEventListener("keydown", function(event) {
       }
     }
 
-    else if (event.keyCode === z) { // remove point from player1 player
+    else if (event.keyCode === pgup) { // remove point from player1 player
       if (player1Points === "15") {
         document.getElementById("player1-points").innerHTML = "0";
       } else if (player1Points === "30") {
@@ -106,7 +106,7 @@ document.addEventListener("keydown", function(event) {
       }
     }
 
-    else if (event.keyCode === s) { // add point to player2 player
+    else if (event.keyCode === pgdn) { // add point to player2 player
       if (player2Points === "0") {
         document.getElementById("player2-points").innerHTML = "15";
       }
@@ -130,7 +130,7 @@ document.addEventListener("keydown", function(event) {
       }
     }
 
-    else if (event.keyCode === x) { // remove point from player2 player
+    else if (event.keyCode === end) { // remove point from player2 player
       if (player2Points === "15") {
         document.getElementById("player2-points").innerHTML = "0";
       } else if (player2Points === "30") {
@@ -200,7 +200,7 @@ document.addEventListener("keydown", function(event) {
     let player2points = parseInt(document.getElementById("player2-points").innerHTML);
 
 
-    if (event.keyCode === a) { // add point to player1 player
+    if (event.keyCode === home) { // add point to player1 player
       player1points += 1;
       document.getElementById("player1-points").innerHTML = player1points;
       if (player1points%6 === 1 && player2points <= player1points-2) {
@@ -224,14 +224,14 @@ document.addEventListener("keydown", function(event) {
       }
     }
 
-    if (event.keyCode === z) { // remove point from player 1
+    if (event.keyCode === pgup) { // remove point from player 1
       if (player1points > 0) {
         player1points -= 1;
         document.getElementById("player1-points").innerHTML = player1points;
       }
     }
 
-    if (event.keyCode === s) { // add point to player2
+    if (event.keyCode === pgdn) { // add point to player2
       player2points += 1;
       document.getElementById("player2-points").innerHTML = player2points;
       if (player2points%6 === 1 && player1points <= player2points-2) {
@@ -255,7 +255,7 @@ document.addEventListener("keydown", function(event) {
       }
     }
 
-    if (event.keyCode === x) { // remove point from player2
+    if (event.keyCode === end) { // remove point from player2
       if (player2points > 0) {
         player2points -= 1;
         document.getElementById("player2-points").innerHTML = player2points;
