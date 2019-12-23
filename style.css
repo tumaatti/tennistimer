@@ -1,0 +1,51 @@
+body {
+  height: 100%;
+  width: 90%;
+  margin: auto;
+}
+.column {
+  font-size: 110px;
+  text-align: center;
+  float: left;
+  width: 50%;
+}
+
+.inner-left-column {
+  font-size: 110px;
+  content-align: center;
+  text-align: right;
+  float: left;
+  width: 40%;
+  padding: 0px 10px 0px 0px;
+}
+
+.inner-right-column {
+  font-size: 110px;
+  content-align: center;
+  text-align: left;
+  float: left;
+  width: 40%;
+  padding: 0px 0px 0px 10px;
+}
+
+.points:after {
+  content: "";
+  display: table;
+  clear:both;
+}
+
+.sets {
+  margin-top: 15px;
+  font-size: 50px;
+}
+
+.player {
+  text-align: center;
+  float: left;
+  width: 30%;
+}
+
+.rounds {
+  float: left;
+  width: 70%;
+}
