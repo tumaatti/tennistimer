@@ -36,6 +36,7 @@ document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds);
 
 function swapServer() {
   let player1Serve = document.getElementById("player1-serve").innerHTML.trim();
+  console.log(player1Serve);
 
   if (player1Serve === "&nbsp;") {
     document.getElementById("player1-serve").innerHTML = "o";
@@ -162,9 +163,9 @@ document.addEventListener("keydown", function(event) {
           if (currentRound < NUM_OF_ROUNDS) {
             if (currentRound%2 === 0) {
               document.getElementById("player1-serve").innerHTML = "&nbsp;";
-              document.getElementById("player2-serve").innerHTML = "X";
+              document.getElementById("player2-serve").innerHTML = "o";
             } else {
-              document.getElementById("player1-serve").innerHTML = "X";
+              document.getElementById("player1-serve").innerHTML = "o";
               document.getElementById("player2-serve").innerHTML = "&nbsp;";
             }
             currentRound += 1;
@@ -179,7 +180,6 @@ document.addEventListener("keydown", function(event) {
       }
     }
   } else { // !TIEBREAK
-    // TODO: pitää handlata syöttövuorot jatkoajalla
     console.log(TIEBREAK);
     if (firstTime) {
       resetPointsToZero();
@@ -189,6 +189,7 @@ document.addEventListener("keydown", function(event) {
     let player1points = parseInt(document.getElementById("player1-points").innerHTML);
     let player2points = parseInt(document.getElementById("player2-points").innerHTML);
 
+
     if (event.keyCode === a) { // add point to player1 player
       player1points += 1;
       document.getElementById("player1-points").innerHTML = player1points;
@@ -197,14 +198,19 @@ document.addEventListener("keydown", function(event) {
         player1Rounds[currentRound] += 1;
         if (currentRound%2 === 0) {
           document.getElementById("player1-serve").innerHTML = "&nbsp;";
-          document.getElementById("player2-serve").innerHTML = "X";
+          document.getElementById("player2-serve").innerHTML = "o";
         } else {
-          document.getElementById("player1-serve").innerHTML = "X";
+          document.getElementById("player1-serve").innerHTML = "o";
           document.getElementById("player2-serve").innerHTML = "&nbsp;";
         }
         currentRound += 1;
         document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
         resetPointsToZero();
+      }
+      let tieBreakNumber = player1points + player2points;
+      console.log(tieBreakNumber);
+      if (tieBreakNumber%2 === 1) {
+        swapServer();
       }
     }
 
@@ -223,14 +229,19 @@ document.addEventListener("keydown", function(event) {
         player2Rounds[currentRound] += 1;
         if (currentRound%2 === 0) {
           document.getElementById("player1-serve").innerHTML = "&nbsp;";
-          document.getElementById("player2-serve").innerHTML = "X";
+          document.getElementById("player2-serve").innerHTML = "o";
         } else {
-          document.getElementById("player1-serve").innerHTML = "X";
+          document.getElementById("player1-serve").innerHTML = "o";
           document.getElementById("player2-serve").innerHTML = "&nbsp;";
         }
         currentRound += 1;
         document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds);
         resetPointsToZero();
+      }
+      let tieBreakNumber = player1points + player2points;
+      if (tieBreakNumber%2 === 1 || tieBreakNumber === 1) {
+        console.log('kikkeliskokkelis');
+        swapServer();
       }
     }
 
