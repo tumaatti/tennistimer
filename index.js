@@ -3,8 +3,8 @@
  * TODO: css-hiposteluja tarvis varmaan jonkin verran tehdä, että tää näyttäis ees joltain
  * TODO: valikko yläreunaan, mistä saa esim pelaajien nimet vaihdettua
  * TODO: colorpicker, jolla saa vaihdettua pelaajan taustavärin ja siten koko UI:n väriä kivasti
+ * TODO: syöttövuorot näkyviin
  */
-
 
 // set keycodes for eventListener
 const r = 82;
@@ -145,6 +145,7 @@ document.addEventListener("keydown", function(event) {
         document.getElementById("player2-rounds").innerHTML = player2Rounds;
       }
     } else { // !TIEBREAK
+      //TODO: TIEBREAK pitäisi varmaan tehdä jotain
       console.log(TIEBREAK);
     }
   }
