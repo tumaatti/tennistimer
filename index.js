@@ -3,7 +3,6 @@
  * TODO: css-hiposteluja tarvis varmaan jonkin verran tehdä, että tää näyttäis ees joltain
  * TODO: valikko yläreunaan, mistä saa esim pelaajien nimet vaihdettua
  * TODO: colorpicker, jolla saa vaihdettua pelaajan taustavärin ja siten koko UI:n väriä kivasti
- * TODO: syöttövuorot näkyviin
  */
 
 // set keycodes for eventListener
@@ -26,7 +25,7 @@ for (let i = 0; i < NUM_OF_ROUNDS; i++) {
   player2Rounds.push(0);
 }
 
-let server = 0;
+let firstTime = true;
 
 function tidyRounds(playerRounds) {
   return playerRounds.toString().replace(/,/g, "  |  ");
@@ -38,13 +37,18 @@ document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds);
 function swapServer() {
   let player1Serve = document.getElementById("player1-serve").innerHTML.trim();
 
-  if (player1Serve === "_") {
-    document.getElementById("player1-serve").innerHTML = "X";
-    document.getElementById("player2-serve").innerHTML = "_";
+  if (player1Serve === "&nbsp;") {
+    document.getElementById("player1-serve").innerHTML = "o";
+    document.getElementById("player2-serve").innerHTML = "&nbsp;";
   } else {
-    document.getElementById("player1-serve").innerHTML = "_";
-    document.getElementById("player2-serve").innerHTML = "X";
+    document.getElementById("player1-serve").innerHTML = "&nbsp";
+    document.getElementById("player2-serve").innerHTML = "o";
   }
+}
+
+function resetPointsToZero() {
+  document.getElementById("player1-points").innerHTML = "0";
+  document.getElementById("player2-points").innerHTML = "0";
 }
 
 document.addEventListener("keydown", function(event) {
@@ -55,8 +59,7 @@ document.addEventListener("keydown", function(event) {
 
   if (!TIEBREAK) {
     if (event.keyCode === r) { // keyCode == "r"
-      document.getElementById("player1-points").innerHTML = "0";
-      document.getElementById("player2-points").innerHTML = "0";
+      resetPointsToZero();
     }
 
     else if (event.keyCode === a) { // add point to player1 player
@@ -129,19 +132,18 @@ document.addEventListener("keydown", function(event) {
     }
 
     else if (event.keyCode === enter) { // enter completes the round
-      document.getElementById("player1-points").innerHTML = "0";
-      document.getElementById("player2-points").innerHTML = "0";
+      resetPointsToZero();
       if (player1Points === "winner") { // set player1Rounds on won round with any other button
         player1Rounds[currentRound] += 1;
         swapServer();
       if (player1Rounds[currentRound] === SETS_TO_WIN && player2Rounds[currentRound] <= SETS_TO_WIN-2) {
         if (currentRound < NUM_OF_ROUNDS) {
           if (currentRound%2 === 0) {
-            document.getElementById("player1-serve").innerHTML = "_";
-            document.getElementById("player2-serve").innerHTML = "X";
+            document.getElementById("player1-serve").innerHTML = "&nbsp;";
+            document.getElementById("player2-serve").innerHTML = "o";
           } else {
-            document.getElementById("player1-serve").innerHTML = "X";
-            document.getElementById("player2-serve").innerHTML = "_";
+            document.getElementById("player1-serve").innerHTML = "o";
+            document.getElementById("player2-serve").innerHTML = "&nbsp;";
           }
           currentRound += 1;
         } else {
@@ -160,11 +162,11 @@ document.addEventListener("keydown", function(event) {
         if (player2Rounds[currentRound] === SETS_TO_WIN && player1Rounds[currentRound] <= SETS_TO_WIN-2) {
           if (currentRound < NUM_OF_ROUNDS) {
             if (currentRound%2 === 0) {
-              document.getElementById("player1-serve").innerHTML = "_";
+              document.getElementById("player1-serve").innerHTML = "&nbsp;";
               document.getElementById("player2-serve").innerHTML = "X";
             } else {
               document.getElementById("player1-serve").innerHTML = "X";
-              document.getElementById("player2-serve").innerHTML = "_";
+              document.getElementById("player2-serve").innerHTML = "&nbsp;";
             }
             currentRound += 1;
           } else {
@@ -180,5 +182,31 @@ document.addEventListener("keydown", function(event) {
   } else { // !TIEBREAK
     //TODO: TIEBREAK pitäisi varmaan tehdä jotain
     console.log(TIEBREAK);
+    if (firstTime) {
+      resetPointsToZero();
+      firstTime = false;
+    }
+
+    let player1points = parseInt(document.getElementById("player1-points").innerHTML);
+    let player2points = parseInt(document.getElementById("player2-points").innerHTML);
+
+    if (event.keyCode === a) { // add point to player1 player
+      player1points += 1;
+      document.getElementById("player1-points").innerHTML = player1points;
+      if (player1points%6 === 1 && player2points <= player1points-2) {
+        TIEBREAK = false;
+        player1Rounds[currentRound] += 1;
+        if (currentRound%2 === 0) {
+          document.getElementById("player1-serve").innerHTML = "&nbsp;";
+          document.getElementById("player2-serve").innerHTML = "X";
+        } else {
+          document.getElementById("player1-serve").innerHTML = "X";
+          document.getElementById("player2-serve").innerHTML = "&nbsp;";
+        }
+        currentRound += 1;
+        document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
+        resetPointsToZero();
+      }
+    }
   }
 })
