@@ -1,3 +1,11 @@
+// set keycodes for eventListener
+const r = 82;
+const a = 65;
+const z = 90;
+const x = 88;
+const s = 83;
+const enter = 13;
+
 let TIEBREAK = false;
 let currentRound = 0;
 const NUM_OF_ROUNDS = 3;
@@ -17,12 +25,6 @@ document.addEventListener("keydown", function(event) {
   let leftPoints = document.getElementById("left-points").innerHTML.trim();
   let rightPoints = document.getElementById("right-points").innerHTML.trim();
 
-  // set keycodes
-  const r = 82;
-  const a = 65;
-  const s = 83;
-  const enter = 13;
-
   console.log(event.keyCode);
 
   if (!TIEBREAK) {
@@ -31,7 +33,7 @@ document.addEventListener("keydown", function(event) {
       document.getElementById("right-points").innerHTML = "0";
     }
 
-    else if (event.keyCode === a) { // keyCode == "a"
+    else if (event.keyCode === a) { // add point to left player
       if (leftPoints === "0") {
         document.getElementById("left-points").innerHTML = "15";
       } else if (leftPoints === "15") {
@@ -52,7 +54,19 @@ document.addEventListener("keydown", function(event) {
       }
     }
 
-    else if (event.keyCode === s) { // keyCode == "s"
+    else if (event.keyCode === z) { // remove point from left player
+      if (leftPoints === "15") {
+        document.getElementById("left-points").innerHTML = "0";
+      } else if (leftPoints === "30") {
+        document.getElementById("left-points").innerHTML = "15";
+      } else if (leftPoints === "40") {
+        document.getElementById("left-points").innerHTML = "30";
+      } else if (leftPoints === "AD" || leftPoints === "winner") {
+        document.getElementById("left-points").innerHTML = "40";
+      }
+    }
+
+    else if (event.keyCode === s) { // add point to right player
       if (rightPoints === "0") {
         document.getElementById("right-points").innerHTML = "15";
       }
@@ -76,13 +90,29 @@ document.addEventListener("keydown", function(event) {
       }
     }
 
+    else if (event.keyCode === x) { // remove point from right player
+      if (rightPoints === "15") {
+        document.getElementById("right-points").innerHTML = "0";
+      } else if (rightPoints === "30") {
+        document.getElementById("right-points").innerHTML = "15";
+      } else if (rightPoints === "40") {
+        document.getElementById("right-points").innerHTML = "30";
+      } else if (rightPoints === "AD" || rightPoints === "winner") {
+        document.getElementById("right-points").innerHTML = "40";
+      }
+    }
+
     else if (event.keyCode === enter) { // enter completes the round
       if (leftPoints === "winner") { // set player1Rounds on won round with any other button
         document.getElementById("left-points").innerHTML = "0";
         document.getElementById("right-points").innerHTML = "0";
         player1Rounds[currentRound] += 1;
         if (player1Rounds[currentRound] === SETS_TO_WIN && player2Rounds[currentRound] <= SETS_TO_WIN-2) {
-          currentRound += 1;
+          if (currentRound <= 3) {
+            currentRound += 1;
+          } else {
+            console.log("do something here"); // TODO: jotain tarvis tehdä, kun matsi päättyy
+          }
         } else if (player1Rounds[currentRound] === SETS_TO_WIN-1 && player2Rounds[currentRound] === SETS_TO_WIN-1) {
           TIEBREAK = true;
           console.log('TIEBREAK = ' + TIEBREAK);
@@ -95,7 +125,11 @@ document.addEventListener("keydown", function(event) {
         document.getElementById("right-points").innerHTML = "0";
         player2Rounds[currentRound] += 1;
         if (player2Rounds[currentRound] === SETS_TO_WIN && player1Rounds[currentRound] <= SETS_TO_WIN-2) {
-          currentRound += 1;
+          if (currentRound <= NUM_OF_ROUNDS) {
+            currentRound += 1;
+          } else {
+            console.log("do something here");
+          }
         } else if (player2Rounds[currentRound] === SETS_TO_WIN-1 && player1Rounds[currentRound] === SETS_TO_WIN-1) {
           TIEBREAK = true;
           console.log('TIEBREAK = ' + TIEBREAK);
