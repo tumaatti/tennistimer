@@ -3,6 +3,7 @@
  * TODO: css-hiposteluja tarvis varmaan jonkin verran tehdä, että tää näyttäis ees joltain
  * TODO: valikko yläreunaan, mistä saa esim pelaajien nimet vaihdettua
  * TODO: colorpicker, jolla saa vaihdettua pelaajan taustavärin ja siten koko UI:n väriä kivasti
+ * TODO: pitäis jotenkin saada noi pikanäppäimet poistettua kätöstä, kun kirjoittaa tonne playereiden nimiin jotain
  */
 
 // set keycodes for eventListener
@@ -33,6 +34,15 @@ function tidyRounds(playerRounds) {
 
 document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
 document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds);
+
+function setPlayerNames() {
+  let player1name = document.getElementById("player1-input").value;
+  let player2name = document.getElementById("player2-input").value;
+  document.getElementById("player1-name").innerHTML = player1name;
+  document.getElementById("player2-name").innerHTML = player2name;
+  document.getElementById("player1-name-sets").innerHTML = player1name;
+  document.getElementById("player2-name-sets").innerHTML = player2name;
+}
 
 function swapServer() {
   let player1Serve = document.getElementById("player1-serve").innerHTML.trim();

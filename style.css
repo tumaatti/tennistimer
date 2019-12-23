@@ -3,11 +3,18 @@ body {
   width: 90%;
   margin: auto;
 }
+
+.menu {
+  z-index: 1;
+  position: absolute;
+}
+
 .column {
   font-size: 110px;
   text-align: center;
   float: left;
   width: 50%;
+  z-index: 2;
 }
 
 .inner-left-column {
