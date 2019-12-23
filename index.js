@@ -157,7 +157,6 @@ document.addEventListener("keydown", function(event) {
       }
       else if (player2Points === "winner") { // set player2Rounds on won round with any other button
         player2Rounds[currentRound] += 1;
-        console.log('kikkeliskokkeli');
         swapServer();
         if (player2Rounds[currentRound] === SETS_TO_WIN && player1Rounds[currentRound] <= SETS_TO_WIN-2) {
           if (currentRound < NUM_OF_ROUNDS) {
@@ -180,7 +179,7 @@ document.addEventListener("keydown", function(event) {
       }
     }
   } else { // !TIEBREAK
-    //TODO: TIEBREAK pitäisi varmaan tehdä jotain
+    // TODO: pitää handlata syöttövuorot jatkoajalla
     console.log(TIEBREAK);
     if (firstTime) {
       resetPointsToZero();
@@ -206,6 +205,39 @@ document.addEventListener("keydown", function(event) {
         currentRound += 1;
         document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
         resetPointsToZero();
+      }
+    }
+
+    if (event.keyCode === z) { // remove point from player 1
+      if (player1points > 0) {
+        player1points -= 1;
+        document.getElementById("player1-points").innerHTML = player1points;
+      }
+    }
+
+    if (event.keyCode === s) { // add point to player2
+      player2points += 1;
+      document.getElementById("player2-points").innerHTML = player2points;
+      if (player2points%6 === 1 && player1points <= player2points-2) {
+        TIEBREAK = false;
+        player2Rounds[currentRound] += 1;
+        if (currentRound%2 === 0) {
+          document.getElementById("player1-serve").innerHTML = "&nbsp;";
+          document.getElementById("player2-serve").innerHTML = "X";
+        } else {
+          document.getElementById("player1-serve").innerHTML = "X";
+          document.getElementById("player2-serve").innerHTML = "&nbsp;";
+        }
+        currentRound += 1;
+        document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds);
+        resetPointsToZero();
+      }
+    }
+
+    if (event.keyCode === x) { // remove point from player2
+      if (player2points > 0) {
+        player2points -= 1;
+        document.getElementById("player2-points").innerHTML = player2points;
       }
     }
   }
