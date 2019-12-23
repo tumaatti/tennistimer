@@ -26,114 +26,146 @@ for (let i = 0; i < NUM_OF_ROUNDS; i++) {
   player2Rounds.push(0);
 }
 
-document.getElementById("player1-rounds").innerHTML = player1Rounds;
-document.getElementById("player2-rounds").innerHTML = player2Rounds;
+let server = 0;
+
+function tidyRounds(playerRounds) {
+  return playerRounds.toString().replace(/,/g, "  |  ");
+}
+
+document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
+document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds);
+
+function swapServer() {
+  let player1Serve = document.getElementById("player1-serve").innerHTML.trim();
+
+  if (player1Serve === "_") {
+    document.getElementById("player1-serve").innerHTML = "X";
+    document.getElementById("player2-serve").innerHTML = "_";
+  } else {
+    document.getElementById("player1-serve").innerHTML = "_";
+    document.getElementById("player2-serve").innerHTML = "X";
+  }
+}
 
 document.addEventListener("keydown", function(event) {
-  let leftPoints = document.getElementById("left-points").innerHTML.trim();
-  let rightPoints = document.getElementById("right-points").innerHTML.trim();
+  let player1Points = document.getElementById("player1-points").innerHTML.trim();
+  let player2Points = document.getElementById("player2-points").innerHTML.trim();
 
   console.log(event.keyCode);
 
   if (!TIEBREAK) {
     if (event.keyCode === r) { // keyCode == "r"
-      document.getElementById("left-points").innerHTML = "0";
-      document.getElementById("right-points").innerHTML = "0";
+      document.getElementById("player1-points").innerHTML = "0";
+      document.getElementById("player2-points").innerHTML = "0";
     }
 
-    else if (event.keyCode === a) { // add point to left player
-      if (leftPoints === "0") {
-        document.getElementById("left-points").innerHTML = "15";
-      } else if (leftPoints === "15") {
-        document.getElementById("left-points").innerHTML = "30";
-      } else if (leftPoints === "30") {
-        document.getElementById("left-points").innerHTML = "40";
-      } else if (leftPoints === "40") {
-        if (rightPoints === "30" || rightPoints === "15" || rightPoints === "0") {
-          document.getElementById("left-points").innerHTML = "winner";
-        } else if (rightPoints === "AD"){
-          document.getElementById("left-points").innerHTML = "40";
-          document.getElementById("right-points").innerHTML = "40";
-        } else if (rightPoints === "40") {
-          document.getElementById("left-points").innerHTML = "AD";
+    else if (event.keyCode === a) { // add point to player1 player
+      if (player1Points === "0") {
+        document.getElementById("player1-points").innerHTML = "15";
+      } else if (player1Points === "15") {
+        document.getElementById("player1-points").innerHTML = "30";
+      } else if (player1Points === "30") {
+        document.getElementById("player1-points").innerHTML = "40";
+      } else if (player1Points === "40") {
+        if (player2Points === "30" || player2Points === "15" || player2Points === "0") {
+          document.getElementById("player1-points").innerHTML = "winner";
+        } else if (player2Points === "AD"){
+          document.getElementById("player1-points").innerHTML = "40";
+          document.getElementById("player2-points").innerHTML = "40";
+        } else if (player2Points === "40") {
+          document.getElementById("player1-points").innerHTML = "AD";
         }
-      } else if (leftPoints === "AD") {
-        document.getElementById("left-points").innerHTML = "winner";
+      } else if (player1Points === "AD") {
+        document.getElementById("player1-points").innerHTML = "winner";
       }
     }
 
-    else if (event.keyCode === z) { // remove point from left player
-      if (leftPoints === "15") {
-        document.getElementById("left-points").innerHTML = "0";
-      } else if (leftPoints === "30") {
-        document.getElementById("left-points").innerHTML = "15";
-      } else if (leftPoints === "40") {
-        document.getElementById("left-points").innerHTML = "30";
-      } else if (leftPoints === "AD" || leftPoints === "winner") {
-        document.getElementById("left-points").innerHTML = "40";
+    else if (event.keyCode === z) { // remove point from player1 player
+      if (player1Points === "15") {
+        document.getElementById("player1-points").innerHTML = "0";
+      } else if (player1Points === "30") {
+        document.getElementById("player1-points").innerHTML = "15";
+      } else if (player1Points === "40") {
+        document.getElementById("player1-points").innerHTML = "30";
+      } else if (player1Points === "AD" || player1Points === "winner") {
+        document.getElementById("player1-points").innerHTML = "40";
       }
     }
 
-    else if (event.keyCode === s) { // add point to right player
-      if (rightPoints === "0") {
-        document.getElementById("right-points").innerHTML = "15";
+    else if (event.keyCode === s) { // add point to player2 player
+      if (player2Points === "0") {
+        document.getElementById("player2-points").innerHTML = "15";
       }
-      else if (rightPoints === "15") {
-        document.getElementById("right-points").innerHTML = "30";
+      else if (player2Points === "15") {
+        document.getElementById("player2-points").innerHTML = "30";
       }
-      else if (rightPoints === "30") {
-        document.getElementById("right-points").innerHTML = "40";
+      else if (player2Points === "30") {
+        document.getElementById("player2-points").innerHTML = "40";
       }
-      else if (rightPoints === "40") {
-        if (leftPoints === "30" || leftPoints === "15" || leftPoints === "0") {
-          document.getElementById("right-points").innerHTML = "winner";
-        } else if (leftPoints === "AD"){
-          document.getElementById("right-points").innerHTML = "40";
-          document.getElementById("left-points").innerHTML = "40";
-        } else if (leftPoints === "40") {
-          document.getElementById("right-points").innerHTML = "AD";
+      else if (player2Points === "40") {
+        if (player1Points === "30" || player1Points === "15" || player1Points === "0") {
+          document.getElementById("player2-points").innerHTML = "winner";
+        } else if (player1Points === "AD"){
+          document.getElementById("player2-points").innerHTML = "40";
+          document.getElementById("player1-points").innerHTML = "40";
+        } else if (player1Points === "40") {
+          document.getElementById("player2-points").innerHTML = "AD";
         }
-      } else if (rightPoints === "AD") {
-        document.getElementById("right-points").innerHTML = "winner";
+      } else if (player2Points === "AD") {
+        document.getElementById("player2-points").innerHTML = "winner";
       }
     }
 
-    else if (event.keyCode === x) { // remove point from right player
-      if (rightPoints === "15") {
-        document.getElementById("right-points").innerHTML = "0";
-      } else if (rightPoints === "30") {
-        document.getElementById("right-points").innerHTML = "15";
-      } else if (rightPoints === "40") {
-        document.getElementById("right-points").innerHTML = "30";
-      } else if (rightPoints === "AD" || rightPoints === "winner") {
-        document.getElementById("right-points").innerHTML = "40";
+    else if (event.keyCode === x) { // remove point from player2 player
+      if (player2Points === "15") {
+        document.getElementById("player2-points").innerHTML = "0";
+      } else if (player2Points === "30") {
+        document.getElementById("player2-points").innerHTML = "15";
+      } else if (player2Points === "40") {
+        document.getElementById("player2-points").innerHTML = "30";
+      } else if (player2Points === "AD" || player2Points === "winner") {
+        document.getElementById("player2-points").innerHTML = "40";
       }
     }
 
     else if (event.keyCode === enter) { // enter completes the round
-      if (leftPoints === "winner") { // set player1Rounds on won round with any other button
-        document.getElementById("left-points").innerHTML = "0";
-        document.getElementById("right-points").innerHTML = "0";
+      document.getElementById("player1-points").innerHTML = "0";
+      document.getElementById("player2-points").innerHTML = "0";
+      if (player1Points === "winner") { // set player1Rounds on won round with any other button
         player1Rounds[currentRound] += 1;
-        if (player1Rounds[currentRound] === SETS_TO_WIN && player2Rounds[currentRound] <= SETS_TO_WIN-2) {
-          if (currentRound <= 3) {
-            currentRound += 1;
+        swapServer();
+      if (player1Rounds[currentRound] === SETS_TO_WIN && player2Rounds[currentRound] <= SETS_TO_WIN-2) {
+        if (currentRound < NUM_OF_ROUNDS) {
+          if (currentRound%2 === 0) {
+            document.getElementById("player1-serve").innerHTML = "_";
+            document.getElementById("player2-serve").innerHTML = "X";
           } else {
-            console.log("do something here"); // TODO: jotain tarvis tehdä, kun matsi päättyy
+            document.getElementById("player1-serve").innerHTML = "X";
+            document.getElementById("player2-serve").innerHTML = "_";
           }
-        } else if (player1Rounds[currentRound] === SETS_TO_WIN-1 && player2Rounds[currentRound] === SETS_TO_WIN-1) {
-          TIEBREAK = true;
-          console.log('TIEBREAK = ' + TIEBREAK);
+          currentRound += 1;
+        } else {
+          console.log("do something here"); // TODO: jotain tarvis tehdä, kun matsi päättyy
         }
-        document.getElementById("player1-rounds").innerHTML = player1Rounds;
+      } else if (player1Rounds[currentRound] === SETS_TO_WIN-1 && player2Rounds[currentRound] === SETS_TO_WIN-1) {
+        TIEBREAK = true;
+        console.log('TIEBREAK = ' + TIEBREAK);
       }
-
-      else if (rightPoints === "winner") { // set player2Rounds on won round with any other button
-        document.getElementById("left-points").innerHTML = "0";
-        document.getElementById("right-points").innerHTML = "0";
+        document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
+      }
+      else if (player2Points === "winner") { // set player2Rounds on won round with any other button
         player2Rounds[currentRound] += 1;
+        console.log('kikkeliskokkeli');
+        swapServer();
         if (player2Rounds[currentRound] === SETS_TO_WIN && player1Rounds[currentRound] <= SETS_TO_WIN-2) {
-          if (currentRound <= NUM_OF_ROUNDS) {
+          if (currentRound < NUM_OF_ROUNDS) {
+            if (currentRound%2 === 0) {
+              document.getElementById("player1-serve").innerHTML = "_";
+              document.getElementById("player2-serve").innerHTML = "X";
+            } else {
+              document.getElementById("player1-serve").innerHTML = "X";
+              document.getElementById("player2-serve").innerHTML = "_";
+            }
             currentRound += 1;
           } else {
             console.log("do something here");
@@ -142,11 +174,11 @@ document.addEventListener("keydown", function(event) {
           TIEBREAK = true;
           console.log('TIEBREAK = ' + TIEBREAK);
         }
-        document.getElementById("player2-rounds").innerHTML = player2Rounds;
+        document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds)
       }
-    } else { // !TIEBREAK
-      //TODO: TIEBREAK pitäisi varmaan tehdä jotain
-      console.log(TIEBREAK);
     }
+  } else { // !TIEBREAK
+    //TODO: TIEBREAK pitäisi varmaan tehdä jotain
+    console.log(TIEBREAK);
   }
 })
