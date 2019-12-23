@@ -1,3 +1,11 @@
+/*
+ * TODO: Kuka voittaa matsin? miten se ilmoitetaan?
+ * TODO: css-hiposteluja tarvis varmaan jonkin verran tehdä, että tää näyttäis ees joltain
+ * TODO: valikko yläreunaan, mistä saa esim pelaajien nimet vaihdettua
+ * TODO: colorpicker, jolla saa vaihdettua pelaajan taustavärin ja siten koko UI:n väriä kivasti
+ */
+
+
 // set keycodes for eventListener
 const r = 82;
 const a = 65;
