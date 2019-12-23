@@ -46,7 +46,6 @@ function setPlayerNames() {
 
 function swapServer() {
   let player1Serve = document.getElementById("player1-serve").innerHTML.trim();
-  console.log(player1Serve);
 
   if (player1Serve === "&nbsp;") {
     document.getElementById("player1-serve").innerHTML = "o";
@@ -162,7 +161,6 @@ document.addEventListener("keydown", function(event) {
         }
       } else if (player1Rounds[currentRound] === SETS_TO_WIN-1 && player2Rounds[currentRound] === SETS_TO_WIN-1) {
         TIEBREAK = true;
-        console.log('TIEBREAK = ' + TIEBREAK);
       }
         document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
       }
@@ -184,13 +182,11 @@ document.addEventListener("keydown", function(event) {
           }
         } else if (player2Rounds[currentRound] === SETS_TO_WIN-1 && player1Rounds[currentRound] === SETS_TO_WIN-1) {
           TIEBREAK = true;
-          console.log('TIEBREAK = ' + TIEBREAK);
         }
         document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds)
       }
     }
   } else { // !TIEBREAK
-    console.log(TIEBREAK);
     if (firstTime) {
       resetPointsToZero();
       firstTime = false;
@@ -250,7 +246,6 @@ document.addEventListener("keydown", function(event) {
       }
       let tieBreakNumber = player1points + player2points;
       if (tieBreakNumber%2 === 1 || tieBreakNumber === 1) {
-        console.log('kikkeliskokkelis');
         swapServer();
       }
     }
