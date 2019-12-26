@@ -3,7 +3,8 @@
  * TODO: css-hiposteluja tarvis varmaan jonkin verran tehdä, että tää näyttäis ees joltain
  * TODO: valikko yläreunaan, mistä saa esim pelaajien nimet vaihdettua
  * TODO: colorpicker, jolla saa vaihdettua pelaajan taustavärin ja siten koko UI:n väriä kivasti
- * TODO: pitäis jotenkin saada noi pikanäppäimet poistettua kätöstä, kun kirjoittaa tonne playereiden nimiin jotain
+ *   https://github.com/PitPik/colorPicker/blob/master/README.md
+ * TODO: syöttövuoroon joku tennispallon kuva?
  */
 
 // set keycodes for eventListener
@@ -32,9 +33,6 @@ function tidyRounds(playerRounds) {
   return playerRounds.toString().replace(/,/g, "  |  ");
 }
 
-document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
-document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds);
-
 function setPlayerNames() {
   let player1name = document.getElementById("player1-input").value;
   let player2name = document.getElementById("player2-input").value;
@@ -60,6 +58,9 @@ function resetPointsToZero() {
   document.getElementById("player1-points").innerHTML = "0";
   document.getElementById("player2-points").innerHTML = "0";
 }
+
+document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
+document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds);
 
 document.addEventListener("keydown", function(event) {
   let player1Points = document.getElementById("player1-points").innerHTML.trim();
