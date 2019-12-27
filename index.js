@@ -1,10 +1,6 @@
 /*
  * TODO: Kuka voittaa matsin? miten se ilmoitetaan?
- * TODO: css-hiposteluja tarvis varmaan jonkin verran tehdä, että tää näyttäis ees joltain
- * TODO: valikko yläreunaan, mistä saa esim pelaajien nimet vaihdettua
- * TODO: colorpicker, jolla saa vaihdettua pelaajan taustavärin ja siten koko UI:n väriä kivasti
- *   https://github.com/PitPik/colorPicker/blob/master/README.md
- * TODO: syöttövuoroon joku tennispallon kuva?
+ * TODO: syöttövuoroon joku tennispallon kuva? vai olisiko keltainen väri ilmoittamaan tämä
  */
 
 // set keycodes for eventListener
@@ -92,11 +88,21 @@ function swapServer() {
   let player1Serve = document.getElementById("player1-serve").innerHTML.trim();
 
   if (player1Serve === "&nbsp;") {
-    document.getElementById("player1-serve").innerHTML = "o";
+    document.getElementById("player1-serve").innerHTML = '<img src="assets/serve.png">';
     document.getElementById("player2-serve").innerHTML = "&nbsp;";
   } else {
     document.getElementById("player1-serve").innerHTML = "&nbsp";
-    document.getElementById("player2-serve").innerHTML = "o";
+    document.getElementById("player2-serve").innerHTML = '<img src="assets/serve.png">';
+  }
+}
+
+function setServer(server) {
+  if (server === 1) {
+    document.getElementById("player1-serve").innerHTML = '<img src="assets/serve.png">';
+    document.getElementById("player2-serve").innerHTML = "&nbsp;";
+  } else if (server === 2) {
+    document.getElementById("player1-serve").innerHTML = "&nbsp";
+    document.getElementById("player2-serve").innerHTML = '<img src="assets/serve.png">';
   }
 }
 
@@ -196,11 +202,9 @@ document.addEventListener("keydown", function(event) {
       if (player1Rounds[currentRound] === SETS_TO_WIN && player2Rounds[currentRound] <= SETS_TO_WIN-2) {
         if (currentRound < NUM_OF_ROUNDS) {
           if (currentRound%2 === 0) {
-            document.getElementById("player1-serve").innerHTML = "&nbsp;";
-            document.getElementById("player2-serve").innerHTML = "o";
+            setServer(2);
           } else {
-            document.getElementById("player1-serve").innerHTML = "o";
-            document.getElementById("player2-serve").innerHTML = "&nbsp;";
+            setServer(1);
           }
           currentRound += 1;
         } else {
@@ -217,11 +221,9 @@ document.addEventListener("keydown", function(event) {
         if (player2Rounds[currentRound] === SETS_TO_WIN && player1Rounds[currentRound] <= SETS_TO_WIN-2) {
           if (currentRound < NUM_OF_ROUNDS) {
             if (currentRound%2 === 0) {
-              document.getElementById("player1-serve").innerHTML = "&nbsp;";
-              document.getElementById("player2-serve").innerHTML = "o";
+              setServer(2);
             } else {
-              document.getElementById("player1-serve").innerHTML = "o";
-              document.getElementById("player2-serve").innerHTML = "&nbsp;";
+              setServer(1);
             }
             currentRound += 1;
           } else {
@@ -250,11 +252,9 @@ document.addEventListener("keydown", function(event) {
         TIEBREAK = false;
         player1Rounds[currentRound] += 1;
         if (currentRound%2 === 0) {
-          document.getElementById("player1-serve").innerHTML = "&nbsp;";
-          document.getElementById("player2-serve").innerHTML = "o";
+          setServer(2);
         } else {
-          document.getElementById("player1-serve").innerHTML = "o";
-          document.getElementById("player2-serve").innerHTML = "&nbsp;";
+          setServer(1);
         }
         currentRound += 1;
         document.getElementById("player1-rounds").innerHTML = tidyRounds(player1Rounds);
@@ -281,11 +281,9 @@ document.addEventListener("keydown", function(event) {
         TIEBREAK = false;
         player2Rounds[currentRound] += 1;
         if (currentRound%2 === 0) {
-          document.getElementById("player1-serve").innerHTML = "&nbsp;";
-          document.getElementById("player2-serve").innerHTML = "o";
+          setServer(2);
         } else {
-          document.getElementById("player1-serve").innerHTML = "o";
-          document.getElementById("player2-serve").innerHTML = "&nbsp;";
+          setServer(1);
         }
         currentRound += 1;
         document.getElementById("player2-rounds").innerHTML = tidyRounds(player2Rounds);

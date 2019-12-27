@@ -2,6 +2,7 @@ html {
   height: 100%;
   width: 100%;
 }
+
 body {
   font-family: "Inconsolata";
   width: 90%;
@@ -48,16 +49,15 @@ body {
 
 .inner-left-column {
   font-size: 110px;
-  content-align: center;
   text-align: right;
+  margin-top: auto;
   float: left;
   width: 40%;
-  padding: 0px 10px 0px 0px;
+  padding: 15px 10px 0px 0px;
 }
 
 .inner-right-column {
   font-size: 110px;
-  content-align: center;
   text-align: left;
   float: left;
   width: 40%;
