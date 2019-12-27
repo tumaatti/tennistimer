@@ -1,7 +1,25 @@
-body {
-  width: 90%;
-  margin: auto;
+html {
   height: 100%;
+  width: 100%;
+}
+body {
+  background-image: linear-gradient(to bottom right, red, yellow);
+  font-family: "Inconsolata";
+  width: 90%;
+  height: 80%;
+  margin: auto;
+}
+
+#menubutton {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  margin-left: 80%;
+  opacity: 70%;
+}
+
+#menubutton:hover {
+  background-color: yellow;
 }
 
 .menu {
@@ -59,14 +77,13 @@ body {
 }
 
 .player {
-  text-align: right;
+  background-color: #696969;
+  text-align: left;
   float: left;
-  width: 30%;
+  width: 20%;
 }
 
 #player1-name-sets {
-  display: inline-block;
-  background-color: #696969;
   padding-right: 30px;
   padding-left: 30px;
   padding-top: 5px;
@@ -74,8 +91,6 @@ body {
 }
 
 #player2-name-sets {
-  display: inline-block;
-  background-color: #696969;
   padding-right: 30px;
   padding-left: 30px;
   padding-top: 5px;
@@ -84,7 +99,7 @@ body {
 
 .rounds {
   float: left;
-  width: calc(70% - 30px);
+  width: calc(80% - 60px);
 }
 
 #player1-rounds {

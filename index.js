@@ -29,11 +29,57 @@ for (let i = 0; i < NUM_OF_ROUNDS; i++) {
 
 let firstTime = true;
 
+// Color picker implementation
+let player1Color = document.querySelector("#player1-color");
+let player1Picker = new Picker(player1Color);
+player1Picker.setOptions({popup: "left"});
+
+let player2Color = document.querySelector("#player2-color");
+let player2Picker = new Picker(player2Color);
+player2Picker.setOptions({popup: "left"});
+
+let body = document.body;
+
+let color1 = "#fff"
+let color2 = "#fff"
+
+player1Picker.onChange = function(color) {
+  color1 = color.rgbaString;
+  player1Color.style.backgroundColor = color.rgbaString;
+  body.style.backgroundImage = "linear-gradient(to bottom right, " + 
+    color1 + 
+    ", " + 
+    color2 +
+    ")";
+}
+
+player2Picker.onChange = function(color) {
+  color2 = color.rgbaString;
+  player2Color.style.backgroundColor = color.rgbaString;
+  body.style.backgroundImage = "linear-gradient(to bottom right, " + 
+    color1 + 
+    ", " + 
+    color2 +
+    ")";
+}
+
+// colorpicker ends
+
 function tidyRounds(playerRounds) {
   return playerRounds.toString().replace(/,/g, "  |  ");
 }
 
+function showMenu() {
+  let menu = document.getElementById("menu");
+  if (menu.style.display === "none" || menu.style.display === "") {
+    menu.style.display = "block";
+  } else {
+    menu.style.display = "none";
+  }
+}
+
 function setPlayerNames() {
+  // TODO: rajoitus pelaajien nimien pituudelle tai sit pitää fiksata asioita
   let player1name = document.getElementById("player1-input").value;
   let player2name = document.getElementById("player2-input").value;
   document.getElementById("player1-name").innerHTML = player1name;
