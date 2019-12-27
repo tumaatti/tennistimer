@@ -1,6 +1,6 @@
 /*
  * TODO: Kuka voittaa matsin? miten se ilmoitetaan?
- * TODO: syöttövuoroon joku tennispallon kuva? vai olisiko keltainen väri ilmoittamaan tämä
+ * TODO: enterin painamisen vois jotenkin tosta selvittää pois
  */
 
 // set keycodes for eventListener
