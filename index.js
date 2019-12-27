@@ -1,6 +1,9 @@
 /*
  * TODO: Kuka voittaa matsin? miten se ilmoitetaan?
  * TODO: enterin painamisen vois jotenkin tosta selvittää pois
+ * TODO: pelin keston kello? eli kauanko matsi on kestänyt - tarvii nappulan mistä saa kellon päälle, pause, continue ja stop
+ * TODO: ohjeet esim tuonne menun alle, mitkä nappulat tekevät mitäkin yms
+ * TODO: ehkä joku README.md tarvii tehdä jossain vaiheessa
  */
 
 // set keycodes for eventListener
