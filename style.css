@@ -3,7 +3,6 @@ html {
   width: 100%;
 }
 body {
-  background-image: linear-gradient(to bottom right, red, yellow);
   font-family: "Inconsolata";
   width: 90%;
   height: 80%;
