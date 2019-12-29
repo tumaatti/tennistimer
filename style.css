@@ -99,24 +99,26 @@ body {
 }
 
 .player {
-  background-color: #696969;
+  background-color: #969696;
   text-align: left;
   float: left;
   width: 20%;
+  border-radius: 5px 0px 0px 5px;
 }
 
 #player1-name-sets {
   padding-right: 30px;
   padding-left: 30px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #player2-name-sets {
   padding-right: 30px;
   padding-left: 30px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0px 0px 0px 5px;
 }
 
 .rounds {
@@ -126,18 +128,20 @@ body {
 
 #player1-rounds {
   display: inline-block;
-  background-color: #696969;
+  background-color: #969696;
   padding-right: 30px;
   padding-left: 30px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0px 5px 0px 0px;
 }
 
 #player2-rounds {
   display: inline-block;
-  background-color: #696969;
+  background-color: #969696;
   padding-right: 30px;
   padding-left: 30px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0px 0px 5px 0px;
 }

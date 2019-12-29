@@ -5,6 +5,7 @@
  *        mistä saa kellon päälle, pause, continue ja stop
  * TODO: ohjeet esim tuonne menun alle, mitkä nappulat tekevät mitäkin yms
  * TODO: ehkä joku README.md tarvii tehdä jossain vaiheessa
+ * TODO; miten saisi voitetun "matchin" näkymään keltaisella sets-näkymässä
  */
 
 // set keycodes for eventListener
@@ -239,13 +240,13 @@ document.addEventListener('keydown', function(event) {
         document.getElementById('player2-points').innerHTML = '40';
       }
     } else if (event.keyCode === enter) { // enter completes the round
-      resetPointsToZero();
       if (player1Points === 'winner') {
+        resetPointsToZero();
         // set player1Rounds on won round with any other button
         player1Rounds[currentRound] += 1;
         swapServer();
         if (player1Rounds[currentRound] === SETS_TO_WIN &&
-            player2Rounds[currentRound] <= SETS_TO_WIN-2) {
+          player2Rounds[currentRound] <= SETS_TO_WIN-2) {
           if (currentRound < NUM_OF_ROUNDS) {
             if (currentRound%2 === 0) {
               setServer(2);
@@ -254,11 +255,11 @@ document.addEventListener('keydown', function(event) {
             }
             currentRound += 1;
           } else {
-            // TODO: jotain tarvis tehdä, kun matsi päättyy
             console.log('do something here');
           }
         } else if (player1Rounds[currentRound] === SETS_TO_WIN-1 &&
                   player2Rounds[currentRound] === SETS_TO_WIN-1) {
+          resetPointsToZero();
           TIEBREAK = true;
         }
         document
