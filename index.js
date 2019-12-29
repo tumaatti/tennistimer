@@ -72,7 +72,10 @@ player2Picker.onChange = function(color) {
  * @return {string}
  */
 function tidyRounds(playerRounds) {
-  return playerRounds.toString().replace(/,/g, '  |  ');
+  const strRounds = playerRounds.toString().replace(/,/g, '  |  ');
+  const rounds = strRounds
+      .replace(/7/g, '<span style="background-color: yellow">7</span>');
+  return rounds;
 }
 
 const setPlayerNamesButton = document.getElementById('set-player-names');
@@ -267,6 +270,7 @@ document.addEventListener('keydown', function(event) {
             .innerHTML = tidyRounds(player1Rounds);
       // set player2Rounds on won round with any other button
       } else if (player2Points === 'winner') {
+        resetPointsToZero();
         player2Rounds[currentRound] += 1;
         swapServer();
         if (player2Rounds[currentRound] === SETS_TO_WIN &&
