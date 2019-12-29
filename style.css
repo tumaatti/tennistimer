@@ -15,7 +15,7 @@ body {
   position: absolute;
   z-index: 2;
   margin-left: 80%;
-  opacity: 70%;
+  opacity: 30%;
 }
 
 #menubutton:hover {
@@ -24,12 +24,35 @@ body {
 
 .menu {
   display: none;
+  padding: 5px;
+  border: solid;
+  border-color: #000;
+  border-width: 1px;
+  background-color: #fff;
   width: 300px;
   margin-right: 10%;
   margin-left: calc(90% - 300px);
   margin-top: 2%;
   z-index: 2;
   position: absolute;
+}
+
+#player1-color {
+  background-color: #fff;
+  border-radius: 3px;
+  border: solid;
+  border-color: #eee;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+#player2-color {
+  background-color: #fff;
+  border-radius: 3px;
+  border: solid;
+  border-color: #eee;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 .points {

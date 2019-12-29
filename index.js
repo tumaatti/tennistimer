@@ -133,6 +133,19 @@ function resetPointsToZero() {
   document.getElementById('player2-points').innerHTML = '0';
 }
 
+// insert instructions on how to use the clock
+const content =
+  '<PRE>How to use the clock: <br>' +
+  'Add points <br>' +
+  '  Player1: Home<br>' +
+  '  Player2: Page Up <br>' +
+  'Remove points <br>' +
+  '  Player1: Page Down <br>' +
+  '  Player2: End<br>' +
+  'Enter: Commit points</PRE>';
+
+document.getElementById('how-to').innerHTML = content;
+
 document.getElementById('player1-rounds').innerHTML = tidyRounds(player1Rounds);
 document.getElementById('player2-rounds').innerHTML = tidyRounds(player2Rounds);
 
@@ -146,7 +159,6 @@ showMenuButton.addEventListener('click', function(event) {
     menu.style.display = 'none';
   }
 });
-
 
 document.addEventListener('keydown', function(event) {
   const player1Points = document
