@@ -12,7 +12,7 @@ const keyShortCuts = {
   pgdn: 34,
   endbtn: 35,
   del: 46,
-  shift: 16,
+  shft: 16,
 };
 
 let TIEBREAK = false;
@@ -148,7 +148,8 @@ const content =
   'Remove points <br>' +
   '  Player1: Page Down <br>' +
   '  Player2: End<br>' +
-  'Enter: Commit points</PRE>';
+  'Enter: Commit points<br>' +
+  'Shift: Start/Stop the clock</PRE>';
 
 document.getElementById('how-to').innerHTML = content;
 
@@ -402,7 +403,7 @@ document.addEventListener('keydown', function(event) {
     }
   }
 
-  if (event.keyCode === shift) {
+  if (event.keyCode === keyShortCuts.shft) {
     if (!clockRunning) {
       let playedTime = document.getElementById('matchtime').innerHTML;
       const pT = playedTime.split(':');
