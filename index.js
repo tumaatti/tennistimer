@@ -91,18 +91,6 @@ function tidyRounds(playerRounds) {
   return rounds;
 }
 
-const setPlayerNamesButton = document.getElementById('set-player-names');
-
-setPlayerNamesButton.addEventListener('click', function(event) {
-  // TODO: rajoitus pelaajien nimien pituudelle tai sit pitää fiksata asioita
-  const player1name = document.getElementById('player1-input').value;
-  const player2name = document.getElementById('player2-input').value;
-  document.getElementById('player1-name').innerHTML = player1name;
-  document.getElementById('player2-name').innerHTML = player2name;
-  document.getElementById('player1-name-sets').innerHTML = player1name;
-  document.getElementById('player2-name-sets').innerHTML = player2name;
-});
-
 /**
  * swap the server
  */
@@ -166,6 +154,18 @@ document.getElementById('how-to').innerHTML = content;
 document.getElementById('player1-rounds').innerHTML = tidyRounds(player1Rounds);
 document.getElementById('player2-rounds').innerHTML = tidyRounds(player2Rounds);
 
+const setPlayerNamesButton = document.getElementById('set-player-names');
+
+setPlayerNamesButton.addEventListener('click', function(event) {
+  // TODO: rajoitus pelaajien nimien pituudelle tai sit pitää fiksata asioita
+  const player1name = document.getElementById('player1-input').value;
+  const player2name = document.getElementById('player2-input').value;
+  document.getElementById('player1-name').innerHTML = player1name;
+  document.getElementById('player2-name').innerHTML = player2name;
+  document.getElementById('player1-name-sets').innerHTML = player1name;
+  document.getElementById('player2-name-sets').innerHTML = player2name;
+});
+
 const showMenuButton = document.getElementById('show-menu');
 
 showMenuButton.addEventListener('click', function(event) {
@@ -175,6 +175,19 @@ showMenuButton.addEventListener('click', function(event) {
   } else {
     menu.style.display = 'none';
   }
+});
+
+const resetSetsButton = document.getElementById('reset-sets');
+
+resetSetsButton.addEventListener('click', function(event) {
+  document.getElementById('player1-rounds').innerHTML = tidyRounds([0, 0, 0]);
+  document.getElementById('player2-rounds').innerHTML = tidyRounds([0, 0, 0]);
+});
+
+const resetClockButton = document.getElementById('reset-clock');
+
+resetClockButton.addEventListener('click', function(event) {
+  document.getElementById('matchtime').innerHTML = '00:00:00';
 });
 
 document.addEventListener('keydown', function(event) {
