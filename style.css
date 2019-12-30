@@ -19,7 +19,7 @@ body {
 }
 
 #menubutton:hover {
-  background-color: yellow;
+  opacity: 100%;
 }
 
 .menu {
@@ -35,6 +35,31 @@ body {
   margin-top: 2%;
   z-index: 2;
   position: absolute;
+}
+
+.player-inputs {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.set-player-names {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.reset-left {
+  float: left;
+  width: 40%;
+}
+
+.reset-right {
+  float: left;
+  width: 40%;
+}
+
+.color-buttons {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #player1-color {
@@ -56,7 +81,7 @@ body {
 }
 
 .points {
-  height: 70%;
+  height: 65%;
 }
 
 .column {
