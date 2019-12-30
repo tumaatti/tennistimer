@@ -12,6 +12,7 @@ const keyShortCuts = {
   pgdn: 34,
   endbtn: 35,
   del: 46,
+  shift: 16,
 };
 
 let TIEBREAK = false;
@@ -401,7 +402,7 @@ document.addEventListener('keydown', function(event) {
     }
   }
 
-  if (event.keyCode === 16) {
+  if (event.keyCode === shift) {
     if (!clockRunning) {
       let playedTime = document.getElementById('matchtime').innerHTML;
       const pT = playedTime.split(':');
@@ -410,9 +411,9 @@ document.addEventListener('keydown', function(event) {
         clockRunning = true;
         const now = new Date();
         const diff = now - org;
-        const dh = Number(pT[0]) + Math.floor((diff / 1000 / 60 / 60)%24);
-        const dm = Number(pT[1]) + Math.floor((diff / 1000 / 60)%60);
-        const ds = Number(pT[2]) + Math.floor((diff / 1000)%60);
+        const dh = Number(pT[0]) + Math.floor((diff / 1000 / 60 / 60) % 24);
+        const dm = Number(pT[1]) + Math.floor((diff / 1000 / 60) % 60);
+        const ds = Number(pT[2]) + Math.floor((diff / 1000) % 60);
         playedTime =
           zpad(String(dh)) + ':' +
           zpad(String(dm)) + ':' +
