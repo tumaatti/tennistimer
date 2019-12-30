@@ -1,11 +1,7 @@
 /*
- * TODO: Kuka voittaa matsin? miten se ilmoitetaan?
- * TODO: enterin painamisen vois jotenkin tosta selvittää pois
- * TODO: pelin keston kello? eli kauanko matsi on kestänyt - tarvii nappulan
- *        mistä saa kellon päälle, pause, continue ja stop
- * TODO: ohjeet esim tuonne menun alle, mitkä nappulat tekevät mitäkin yms
- * TODO: ehkä joku README.md tarvii tehdä jossain vaiheessa
- * TODO; miten saisi voitetun "matchin" näkymään keltaisella sets-näkymässä
+ * TODO: maybe remove the usage of the enter-key?
+ * TODO: clock needs a reset butto. also reset button could be
+ *       usefull also for the sets
  */
 
 // set keycodes for eventListener
@@ -22,6 +18,8 @@ let TIEBREAK = false;
 let currentRound = 0;
 const NUM_OF_ROUNDS = 3;
 const SETS_TO_WIN = 7;
+let clock;
+let clockRunning = false;
 
 const player1Rounds = [];
 const player2Rounds = [];
@@ -67,6 +65,19 @@ player2Picker.onChange = function(color) {
 };
 
 // colorpicker ends
+
+/**
+ * zeropad string to have leading zeros
+ * @param {string} str
+ * @return {string}
+ */
+function zpad(str) {
+  let a = String(str).trim();
+  if (a.length === 1) {
+    a = '0' + a;
+  }
+  return a;
+}
 
 /**
  * tidy the displayed rounds to use '|' instead of ',' from the arrays
@@ -374,6 +385,30 @@ document.addEventListener('keydown', function(event) {
         player2points -= 1;
         document.getElementById('player2-points').innerHTML = player2points;
       }
+    }
+  }
+
+  if (event.keyCode === 16) {
+    if (!clockRunning) {
+      let playedTime = document.getElementById('matchtime').innerHTML;
+      const pT = playedTime.split(':');
+      const org = new Date();
+      clock = setInterval(function startClock() {
+        clockRunning = true;
+        const now = new Date();
+        const diff = now - org;
+        const dh = Number(pT[0]) + Math.floor((diff / 1000 / 60 / 60)%24);
+        const dm = Number(pT[1]) + Math.floor((diff / 1000 / 60)%60);
+        const ds = Number(pT[2]) + Math.floor((diff / 1000)%60);
+        playedTime =
+          zpad(String(dh)) + ':' +
+          zpad(String(dm)) + ':' +
+          zpad(String(ds));
+        document.getElementById('matchtime').innerHTML = playedTime;
+      }, 1000);
+    } else {
+      clearInterval(clock);
+      clockRunning = false;
     }
   }
 });

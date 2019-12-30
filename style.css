@@ -94,7 +94,6 @@ body {
 }
 
 .sets {
-  height: 30%;
   font-size: 50px;
 }
 
@@ -123,7 +122,15 @@ body {
 
 .rounds {
   float: left;
-  width: calc(80% - 60px);
+  width: calc(50% - 60px);
+}
+
+.matchtime {
+  float: left;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: calc(145px - 50px - 10px - 2.5px);
+  padding-bottom: 10px;
 }
 
 #player1-rounds {
