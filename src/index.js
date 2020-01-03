@@ -15,22 +15,28 @@ const keyShortCuts = {
   shft: 16,
 };
 
-let TIEBREAK = false;
-let currentRound = 0;
 const NUM_OF_ROUNDS = 3;
 const SETS_TO_WIN = 7;
+const pointsArr = ['0', '15', '30', '40', 'AD', 'winner'];
+let TIEBREAK = false;
 let clock;
 let clockRunning = false;
-pointsArr = ['0', '15', '30', '40', 'AD', 'winner'];
+let firstTime = true;
 
-const player1Rounds = [];
-const player2Rounds = [];
+const rounds = {
+  player1: [],
+  player2: [],
+  current: 0,
+};
 for (let i = 0; i < NUM_OF_ROUNDS; i++) {
-  player1Rounds.push(0);
-  player2Rounds.push(0);
+  rounds.player1.push(0);
+  rounds.player2.push(0);
 }
 
-let firstTime = true;
+const points = {
+  player1: 0,
+  player2: 0,
+};
 
 // Color picker implementation
 const player1Color = document.querySelector('#player1-color');
@@ -46,30 +52,33 @@ const body = document.body;
 let color1 = '#fff';
 let color2 = '#fff';
 
-player1Picker.onChange = function(color) {
-  color1 = color.rgbaString;
-  player1Color.style.backgroundColor = color.rgbaString;
+/**
+ * set gradient colors for body
+ * @param {string} color1
+ * @param {string} color2
+ */
+function setColor(color1, color2) {
   body.style.backgroundImage = 'linear-gradient(to bottom right, ' +
     color1 +
     ', ' +
     color2 +
     ')';
+}
+
+player1Picker.onChange = function(color) {
+  color1 = color.rgbaString;
+  player1Color.style.backgroundColor = color.rgbaString;
+  setColor(color1, color2);
 };
 
 player2Picker.onChange = function(color) {
   color2 = color.rgbaString;
   player2Color.style.backgroundColor = color.rgbaString;
-  body.style.backgroundImage = 'linear-gradient(to bottom right, ' +
-    color1 +
-    ', ' +
-    color2 +
-    ')';
+  setColor(color1, color2);
 };
 
-// colorpicker ends
-
 /**
- * zeropad string to have leading zeros
+ * zeropad string to have leading zeros TEST
  * @param {string} str
  * @return {string}
  */
@@ -82,7 +91,7 @@ function zpad(str) {
 }
 
 /**
- * tidy the displayed rounds to use '|' instead of ',' from the arrays
+ * tidy the displayed rounds to use '|' instead of ',' from the arrays TEST
  * @param {array} playerRounds
  * @return {string}
  */
@@ -94,7 +103,7 @@ function tidyRounds(playerRounds) {
 }
 
 /**
- * swap the server
+ * use the setServer-function to swap the server
  */
 function swapServer() {
   const player1Serve = document.
@@ -102,15 +111,9 @@ function swapServer() {
       .innerHTML.trim();
 
   if (player1Serve === '&nbsp;') {
-    document.getElementById('player1-serve').innerHTML =
-      '<img src="assets/serve.png">';
-    document.getElementById('player2-serve').innerHTML =
-      '&nbsp;';
+    setServer(1);
   } else {
-    document.getElementById('player1-serve').innerHTML =
-      '&nbsp';
-    document.getElementById('player2-serve').innerHTML =
-      '<img src="assets/serve.png">';
+    setServer(2);
   }
 }
 
@@ -134,12 +137,15 @@ function setServer(server) {
 
 /**
  * reset both player points to zero
+ * @param {object} points
+ * @return {object}
  */
 function resetPointsToZero() {
-  player1Points = 0;
-  player2Points = 0;
+  points.player1 = 0;
+  points.player2 = 0;
   document.getElementById('player1-points').innerHTML = '0';
   document.getElementById('player2-points').innerHTML = '0';
+  return points;
 }
 
 // insert instructions on how to use the clock
@@ -156,8 +162,10 @@ const content =
 
 document.getElementById('how-to').innerHTML = content;
 
-document.getElementById('player1-rounds').innerHTML = tidyRounds(player1Rounds);
-document.getElementById('player2-rounds').innerHTML = tidyRounds(player2Rounds);
+document.getElementById('player1-rounds').innerHTML =
+  tidyRounds(rounds.player1);
+document.getElementById('player2-rounds').innerHTML =
+  tidyRounds(rounds.player2);
 
 const setPlayerNamesButton = document.getElementById('set-player-names');
 
@@ -195,9 +203,6 @@ resetClockButton.addEventListener('click', function(event) {
   document.getElementById('matchtime').innerHTML = '00:00:00';
 });
 
-let player1Points = 0;
-let player2Points = 0;
-
 
 document.addEventListener('keydown', function(event) {
   console.log(event.keyCode);
@@ -207,107 +212,107 @@ document.addEventListener('keydown', function(event) {
       resetPointsToZero();
     } else if (event.keyCode === keyShortCuts.home) {
       // add point to player1 player
-      if (player1Points < 3) {
-        player1Points += 1;
-      } else if (player1Points === 3) {
-        if (player2Points < 3) {
-          player1Points = 5;
-        } else if (player2Points === 3) {
-          player1Points = 4;
-        } else if (player2Points === 4) {
-          player1Points = 4;
-          player2Points = 3;
+      if (points.player1 < 3) {
+        points.player1 += 1;
+      } else if (points.player1 === 3) {
+        if (points.player2 < 3) {
+          points.player1 = 5;
+        } else if (points.player2 === 3) {
+          points.player1 = 4;
+        } else if (points.player2 === 4) {
+          points.player1 = 4;
+          points.player2 = 3;
         }
-      } else if (player1Points === 4) {
-        player1Points += 1;
+      } else if (points.player1 === 4) {
+        points.player1 += 1;
       }
       document.getElementById('player1-points').innerHTML =
-        pointsArr[player1Points];
+        pointsArr[points.player1];
       document.getElementById('player2-points').innerHTML =
-        pointsArr[player2Points];
+        pointsArr[points.player2];
     } else if (event.keyCode === keyShortCuts.pgup) {
       // remove point from player1 player
-      if (player1Points === 5) player1Points = 3;
-      else if (player1Points === 0) player1Points = 0;
-      else player1Points -= 1;
+      if (points.player1 === 5) points.player1 = 3;
+      else if (points.player1 === 0) points.player1 = 0;
+      else points.player1 -= 1;
       document.getElementById('player1-points').innerHTML =
-        pointsArr[player1Points];
+        pointsArr[points.player1];
     } else if (event.keyCode === keyShortCuts.pgdn) {
       // add point to player2 player
-      if (player2Points < 3) {
-        player2Points += 1;
-      } else if (player2Points === 3) {
-        if (player1Points < 3) {
-          player2Points = 5;
-        } else if (player1Points === 3) {
-          player2Points = 4;
-        } else if (player1Points === 4) {
-          player2Points = 4;
-          player1Points = 3;
+      if (points.player2 < 3) {
+        points.player2 += 1;
+      } else if (points.player2 === 3) {
+        if (points.player1 < 3) {
+          points.player2 = 5;
+        } else if (points.player1 === 3) {
+          points.player2 = 4;
+        } else if (points.player1 === 4) {
+          points.player2 = 4;
+          points.player1 = 3;
         }
-      } else if (player2Points === 4) {
-        player2Points += 1;
+      } else if (points.player2 === 4) {
+        points.player2 += 1;
       }
       document.getElementById('player1-points').innerHTML =
-        pointsArr[player1Points];
+        pointsArr[points.player1];
       document.getElementById('player2-points').innerHTML =
-        pointsArr[player2Points];
+        pointsArr[points.player2];
     } else if (event.keyCode === keyShortCuts.endbtn) {
       // remove point from player2 player
-      if (player2Points === 5) player2Points = 3;
-      else if (player2Points === 0) player2Points = 0;
-      else player2Points -= 1;
+      if (points.player2 === 5) points.player2 = 3;
+      else if (points.player2 === 0) points.player2 = 0;
+      else points.player2 -= 1;
       document.getElementById('player2-points').innerHTML =
-        pointsArr[player2Points];
+        pointsArr[points.player2];
     } else if (event.keyCode === keyShortCuts.enter) {
       // enter completes the round
-      if (player1Points === 5) {
+      if (points.player1 === 5) {
         resetPointsToZero();
-        player1Rounds[currentRound] += 1;
+        rounds.player1[rounds.current] += 1;
         swapServer();
-        if (player1Rounds[currentRound] === SETS_TO_WIN &&
-          player2Rounds[currentRound] <= SETS_TO_WIN-2) {
-          if (currentRound < NUM_OF_ROUNDS) {
-            if (currentRound%2 === 0) {
+        if (rounds.player1[rounds.current] === SETS_TO_WIN &&
+          rounds.player2[rounds.current] <= SETS_TO_WIN-2) {
+          if (rounds.current < NUM_OF_ROUNDS) {
+            if (rounds.current%2 === 0) {
               setServer(2);
             } else {
               setServer(1);
             }
-            currentRound += 1;
+            rounds.current += 1;
           } else {
             console.log('do something here');
           }
-        } else if (player1Rounds[currentRound] === SETS_TO_WIN-1 &&
-                  player2Rounds[currentRound] === SETS_TO_WIN-1) {
+        } else if (rounds.player1[rounds.current] === SETS_TO_WIN-1 &&
+                  rounds.player2[rounds.current] === SETS_TO_WIN-1) {
           resetPointsToZero();
           TIEBREAK = true;
         }
         document
             .getElementById('player1-rounds')
-            .innerHTML = tidyRounds(player1Rounds);
-      } else if (player2Points === 5) {
+            .innerHTML = tidyRounds(rounds.player1);
+      } else if (points.player2 === 5) {
         resetPointsToZero();
-        player2Rounds[currentRound] += 1;
+        rounds.player2[rounds.current] += 1;
         swapServer();
-        if (player2Rounds[currentRound] === SETS_TO_WIN &&
-            player1Rounds[currentRound] <= SETS_TO_WIN-2) {
-          if (currentRound < NUM_OF_ROUNDS) {
-            if (currentRound%2 === 0) {
+        if (rounds.player2[rounds.current] === SETS_TO_WIN &&
+            rounds.player1[rounds.current] <= SETS_TO_WIN-2) {
+          if (rounds.current < NUM_OF_ROUNDS) {
+            if (rounds.current%2 === 0) {
               setServer(2);
             } else {
               setServer(1);
             }
-            currentRound += 1;
+            rounds.current += 1;
           } else {
             console.log('do something here');
           }
-        } else if (player2Rounds[currentRound] === SETS_TO_WIN-1 &&
-                  player1Rounds[currentRound] === SETS_TO_WIN-1) {
+        } else if (rounds.player2[rounds.current] === SETS_TO_WIN-1 &&
+                  rounds.player1[rounds.current] === SETS_TO_WIN-1) {
           TIEBREAK = true;
         }
         document
             .getElementById('player2-rounds')
-            .innerHTML = tidyRounds(player2Rounds);
+            .innerHTML = tidyRounds(rounds.player2);
       }
     }
   } else { // !TIEBREAK
@@ -316,33 +321,23 @@ document.addEventListener('keydown', function(event) {
       firstTime = false;
     }
 
-    let player1points =
-      parseInt(document
-          .getElementById('player1-points')
-          .innerHTML);
-    let player2points =
-      parseInt(document
-          .getElementById('player2-points')
-          .innerHTML);
-
-
     if (event.keyCode === keyShortCuts.home) { // add point to player1 player
-      player1points += 1;
-      document.getElementById('player1-points').innerHTML = player1points;
-      if (player1points%6 === 1 && player2points <= player1points-2) {
+      points.player1 += 1;
+      document.getElementById('player1-points').innerHTML = points.player1;
+      if (points.player1%6 === 1 && points.player2 <= points.player1-2) {
         TIEBREAK = false;
-        player1Rounds[currentRound] += 1;
-        if (currentRound%2 === 0) {
+        rounds.player1[rounds.current] += 1;
+        if (rounds.current%2 === 0) {
           setServer(2);
         } else {
           setServer(1);
         }
-        currentRound += 1;
+        rounds.current += 1;
         document.getElementById('player1-rounds').innerHTML =
-          tidyRounds(player1Rounds);
+          tidyRounds(rounds.player1);
         resetPointsToZero();
       }
-      const tieBreakNumber = player1points + player2points;
+      const tieBreakNumber = points.player1 + points.player2;
       console.log(tieBreakNumber);
       if (tieBreakNumber%2 === 1) {
         swapServer();
@@ -350,38 +345,38 @@ document.addEventListener('keydown', function(event) {
     }
 
     if (event.keyCode === keyShortCuts.pgup) { // remove point from player 1
-      if (player1points > 0) {
-        player1points -= 1;
-        document.getElementById('player1-points').innerHTML = player1points;
+      if (points.player1 > 0) {
+        points.player1 -= 1;
+        document.getElementById('player1-points').innerHTML = points.player1;
       }
     }
 
     if (event.keyCode === keyShortCuts.pgdn) { // add point to player2
-      player2points += 1;
-      document.getElementById('player2-points').innerHTML = player2points;
-      if (player2points%6 === 1 && player1points <= player2points-2) {
+      points.player2 += 1;
+      document.getElementById('player2-points').innerHTML = points.player2;
+      if (points.player2%6 === 1 && points.player1 <= points.player2-2) {
         TIEBREAK = false;
-        player2Rounds[currentRound] += 1;
-        if (currentRound%2 === 0) {
+        rounds.player2[rounds.current] += 1;
+        if (rounds.current%2 === 0) {
           setServer(2);
         } else {
           setServer(1);
         }
-        currentRound += 1;
+        rounds.current += 1;
         document.getElementById('player2-rounds').innerHTML =
-          tidyRounds(player2Rounds);
+          tidyRounds(rounds.player2);
         resetPointsToZero();
       }
-      const tieBreakNumber = player1points + player2points;
+      const tieBreakNumber = points.player1 + points.player2;
       if (tieBreakNumber%2 === 1 || tieBreakNumber === 1) {
         swapServer();
       }
     }
 
     if (event.keyCode === keyShortCuts.endbtn) { // remove point from player2
-      if (player2points > 0) {
-        player2points -= 1;
-        document.getElementById('player2-points').innerHTML = player2points;
+      if (points.player2 > 0) {
+        points.player2 -= 1;
+        document.getElementById('player2-points').innerHTML = points.player2;
       }
     }
   }
