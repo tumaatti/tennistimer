@@ -226,7 +226,7 @@ document.addEventListener('keydown', function(event) {
         } else if (player2.points === 3) {
           player1.points = 4;
         } else if (player2.points === 4) {
-          player1.points = 4;
+          player1.points = 3;
           player2.points = 3;
         }
       } else if (player1.points === 4) {
@@ -253,7 +253,7 @@ document.addEventListener('keydown', function(event) {
         } else if (player1.points === 3) {
           player2.points = 4;
         } else if (player1.points === 4) {
-          player2.points = 4;
+          player2.points = 3;
           player1.points = 3;
         }
       } else if (player2.points === 4) {
