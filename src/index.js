@@ -15,6 +15,7 @@ const keyShortCuts = {
   shft: 16,
 };
 
+let tieBreakNumber;
 const NUM_OF_ROUNDS = 3;
 const SETS_TO_WIN = 7;
 const pointsArr = ['0', '15', '30', '40', 'AD', 'winner'];
@@ -210,6 +211,38 @@ resetClockButton.addEventListener('click', function(event) {
 });
 
 
+const addPointToPlayer = (addToPlayer) => {
+  if (addToPlayer === 1) {
+    if (player1.points === 3 && player2.points < 3) {
+      player1.points = 5;
+    } else if (player1.points === 3 && player2.points === 3) {
+      player1.points = 4;
+    } else if (player1.points === 3 && player2.points === 4) {
+      player2.points = 3;
+    } else if (player1.points < 3 || player1.points === 4) {
+      player1.points += 1;
+    }
+  } else if (addToPlayer === 2) {
+    if (player2.points === 3 && player1.points < 3) {
+      player2.points = 5;
+    } else if (player2.points === 3 && player1.points === 3) {
+      player2.points = 4;
+    } else if (player2.points === 3 && player1.points === 4) {
+      player1.points = 3;
+    } else if (player2.points < 3 || player2.points === 4) {
+      player2.points += 1;
+    }
+  }
+};
+
+const writePoints = () => {
+  document.getElementById('player1-points').innerHTML =
+    pointsArr[player1.points];
+  document.getElementById('player2-points').innerHTML =
+    pointsArr[player2.points];
+};
+
+
 document.addEventListener('keydown', function(event) {
   console.log(event.keyCode);
 
@@ -219,25 +252,8 @@ document.addEventListener('keydown', function(event) {
         resetPointsToZero();
         break;
       case keyShortCuts.home:
-        // add point to player1 player
-        if (player1.points < 3) {
-          player1.points += 1;
-        } else if (player1.points === 3) {
-          if (player2.points < 3) {
-            player1.points = 5;
-          } else if (player2.points === 3) {
-            player1.points = 4;
-          } else if (player2.points === 4) {
-            player1.points = 3;
-            player2.points = 3;
-          }
-        } else if (player1.points === 4) {
-          player1.points += 1;
-        }
-        document.getElementById('player1-points').innerHTML =
-          pointsArr[player1.points];
-        document.getElementById('player2-points').innerHTML =
-          pointsArr[player2.points];
+        addPointToPlayer(1);
+        writePoints(player1, player2);
         break;
       case keyShortCuts.pgup:
         // remove point from player1 player
@@ -248,25 +264,8 @@ document.addEventListener('keydown', function(event) {
           pointsArr[player1.points];
         break;
       case keyShortCuts.pgdn:
-        // add point to player2 player
-        if (player2.points < 3) {
-          player2.points += 1;
-        } else if (player2.points === 3) {
-          if (player1.points < 3) {
-            player2.points = 5;
-          } else if (player1.points === 3) {
-            player2.points = 4;
-          } else if (player1.points === 4) {
-            player2.points = 3;
-            player1.points = 3;
-          }
-        } else if (player2.points === 4) {
-          player2.points += 1;
-        }
-        document.getElementById('player1-points').innerHTML =
-          pointsArr[player1.points];
-        document.getElementById('player2-points').innerHTML =
-          pointsArr[player2.points];
+        addPointToPlayer(2);
+        writePoints();
         break;
       case keyShortCuts.endbtn:
         // remove point from player2 player
@@ -351,7 +350,7 @@ document.addEventListener('keydown', function(event) {
             tidyRounds(player1.rounds);
           resetPointsToZero();
         }
-        const tieBreakNumber = player1.points + player2.points;
+        tieBreakNumber = player1.points + player2.points;
         console.log(tieBreakNumber);
         if (tieBreakNumber%2 === 1) {
           swapServer();
