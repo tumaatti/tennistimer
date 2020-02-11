@@ -297,6 +297,7 @@ document.addEventListener('keydown', function(event) {
             player2.rounds[currentRounds] === SETS_TO_WIN-1) {
             resetPointsToZero();
             TIEBREAK = true;
+            firstTime = true;
           }
           document
               .getElementById('player1-rounds')
@@ -320,6 +321,7 @@ document.addEventListener('keydown', function(event) {
           } else if (player2.rounds[currentRounds] === SETS_TO_WIN-1 &&
             player1.rounds[currentRounds] === SETS_TO_WIN-1) {
             TIEBREAK = true;
+            firstTime = true;
           }
           document
               .getElementById('player2-rounds')
