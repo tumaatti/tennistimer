@@ -162,8 +162,9 @@ const content =
   'Remove points <br>' +
   '  Player1: Page Down <br>' +
   '  Player2: End<br>' +
-  'Enter: Commit points<br>' +
-  'Shift: Start/Stop the clock</PRE>';
+  'Commit points: Enter<br>' +
+  'Start/Stop the clock: Shift<br>' +
+  'Reset Points: Del</PRE>';
 
 document.getElementById('how-to').innerHTML = content;
 

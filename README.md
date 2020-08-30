@@ -9,5 +9,6 @@ Remove point from Player1: Page Down
 Remove point from Player2: End
 Commit set:                Enter
 Start/stop the clock:      Shift
+Reset points:              Del
 ```
 
