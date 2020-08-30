@@ -1,86 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="src/style.css">
-<link type="font" href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-<title>tenniskello2000</title>
-</head>
-<body>
-<div class="menu-button" id="menubutton">
-<button type="button" id="show-menu">show menu</button>
-</div>
-<div class="menu" id="menu">
-  <div class="player-inputs">
-player1 name: <input type="text" id="player1-input"><br>
-player2 name: <input type="text" id="player2-input">
-</div>
-<div class="set-player-names">
-<button type="button" id="set-player-names">Change names</button><br>
-</div>
-<div class="color-buttons">
-<button type="button" id="player1-color">Player1 color</button>
-<button type="button" id="player2-color">Player2 color</button>
-</div>
-<div class="how-to" id="how-to">
-</div>
-<div class="reset-buttons" id="reset-buttons">
-<div class="reset-left">
-<button class="reset-buttons" type="button" id="reset-clock">Reset clock</button><br>
-</div>
-<div class="reset-right">
-<button class="reset-buttons" type="button" id="reset-sets">Reset sets</button><br>
-</div>
-</div>
-</div>
-<div class="points">
-<div class="column" id="player1-column">
-<div id="player1-name">
-player1
-</div>
-<div class="inner-left-column" id="player1-serve">
-<img src="assets/serve.png" alt="server">
-</div>
-<div class="inner-right-column" id="player1-points">
-0
-</div>
-</div>
-<div class="column" id="player2-column">
-<div id="player2-name">
-player2
-</div>
-<div class="inner-left-column" id="player2-serve">
-&nbsp;
-</div>
-<div class="inner-right-column" id="player2-points">
-0
-</div>
-</div>
-</div>
-<div class="sets">
-<div class="player">
-<div id="player1-name-sets">
-player1
-</div>
-<div id="player2-name-sets">
-player2
-</div>
-</div>
-<div class="rounds">
-<div id="player1-rounds">
-0
-</div>
-<br>
-<div id="player2-rounds">
-0
-</div>
-</div>
-<div class="matchtime" id="matchtime">
-00:00:00
-</div>
-</div>
-<script type="text/javascript" src="https://unpkg.com/vanilla-picker@2"></script>
-<script type="text/javascript" src="src/index.js"></script>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="src/style.css">
+        <link type="font" href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+        <title>tenniskello2000</title>
+    </head>
+    <body>
+        <div class="menu-button" id="menubutton">
+            <button type="button" id="show-menu">show menu</button>
+        </div>
+        <div class="menu" id="menu">
+            <div class="player-inputs">
+                player1 name: <input type="text" id="player1-input"><br>
+                player2 name: <input type="text" id="player2-input">
+            </div>
+            <div class="set-player-names">
+                <button type="button" id="set-player-names">Change names</button><br>
+            </div>
+            <div class="color-buttons">
+                <button type="button" id="player1-color">Player1 color</button>
+                <button type="button" id="player2-color">Player2 color</button>
+            </div>
+            <div class="how-to" id="how-to">
+            </div>
+            <div class="reset-buttons" id="reset-buttons">
+                <div class="reset-left">
+                    <button class="reset-buttons" type="button" id="reset-clock">Reset clock</button><br>
+                </div>
+                <div class="reset-right">
+                    <button class="reset-buttons" type="button" id="reset-sets">Reset sets</button><br>
+                </div>
+            </div>
+        </div>
+        <div class="points">
+            <div class="column" id="player1-column">
+                <div id="player1-name">
+                    player1
+                </div>
+                <div class="inner-left-column" id="player1-serve">
+                    <img src="assets/serve.png" alt="server">
+                </div>
+                <div class="inner-right-column" id="player1-points">
+                    0
+                </div>
+            </div>
+            <div class="column" id="player2-column">
+                <div id="player2-name">
+                    player2
+                </div>
+                <div class="inner-left-column" id="player2-serve">
+                    &nbsp;
+                </div>
+                <div class="inner-right-column" id="player2-points">
+                    0
+                </div>
+            </div>
+        </div>
+        <div class="sets">
+            <div class="player">
+                <div id="player1-name-sets">
+                    player1
+                </div>
+                <div id="player2-name-sets">
+                    player2
+                </div>
+            </div>
+            <div class="rounds">
+                <div id="player1-rounds">
+                    0
+                </div>
+                <br>
+                <div id="player2-rounds">
+                    0
+                </div>
+            </div>
+            <div class="matchtime" id="matchtime">
+                00:00:00
+            </div>
+        </div>
+        <script type="text/javascript" src="https://unpkg.com/vanilla-picker@2"></script>
+        <script type="text/javascript" src="src/index.js"></script>
+    </body>
 </html>
 
