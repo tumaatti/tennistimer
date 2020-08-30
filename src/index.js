@@ -1,7 +1,5 @@
 /*
  * TODO: maybe remove the usage of the enter-key?
- * TODO: clock needs a reset butto. also reset button could be
- *       usefull also for the sets
  */
 
 // set keycodes for eventListener
