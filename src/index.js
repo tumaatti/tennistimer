@@ -152,6 +152,15 @@ const writePoints = () => {
   }
 };
 
+const writeRounds = () => {
+  document
+    .getElementById('player1-rounds')
+    .innerHTML = tidyRounds(player1.rounds);
+  document
+    .getElementById('player2-rounds')
+    .innerHTML = tidyRounds(player2.rounds);
+};
+
 
 document.addEventListener('keydown', function(event) {
   console.log(event.keyCode);
@@ -163,7 +172,7 @@ document.addEventListener('keydown', function(event) {
         break;
       case keyShortCuts.home:
         addPointToPlayer(1);
-        writePoints(player1, player2);
+        writePoints();
         break;
       case keyShortCuts.pgup:
         // remove point from player1 player
@@ -207,9 +216,7 @@ document.addEventListener('keydown', function(event) {
             TIEBREAK = true;
             firstTime = true;
           }
-          document
-              .getElementById('player1-rounds')
-              .innerHTML = tidyRounds(player1.rounds);
+          writeRounds();
         } else if (player2.points === 5) {
           resetPointsToZero();
           player2.rounds[currentRounds] += 1;
@@ -231,9 +238,7 @@ document.addEventListener('keydown', function(event) {
             TIEBREAK = true;
             firstTime = true;
           }
-          document
-              .getElementById('player2-rounds')
-              .innerHTML = tidyRounds(player2.rounds);
+          writeRounds();
         }
         break;
     }
@@ -256,8 +261,7 @@ document.addEventListener('keydown', function(event) {
             setServer(1);
           }
           currentRounds += 1;
-          document.getElementById('player1-rounds').innerHTML =
-            tidyRounds(player1.rounds);
+          writeRounds();
           resetPointsToZero();
         }
         tieBreakNumber = player1.points + player2.points;
@@ -286,8 +290,7 @@ document.addEventListener('keydown', function(event) {
             setServer(1);
           }
           currentRounds += 1;
-          document.getElementById('player2-rounds').innerHTML =
-            tidyRounds(player2.rounds);
+          writeRounds();
           resetPointsToZero();
         }
         tieBreakNumber = player1.points + player2.points;
