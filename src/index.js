@@ -194,6 +194,7 @@ document.addEventListener('keydown', function(event) {
         break;
       case keyShortCuts.enter:
         // enter completes the round
+        // TODO: this could use some tidying up and maybe moved to separate function
         if (player1.points === 5) {
           resetPointsToZero();
           player1.rounds[currentRounds] += 1;
