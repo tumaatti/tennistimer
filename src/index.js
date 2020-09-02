@@ -141,10 +141,15 @@ const addPointToPlayer = (addToPlayer) => {
 };
 
 const writePoints = () => {
-  document.getElementById('player1-points').innerHTML =
-    pointsArr[player1.points];
-  document.getElementById('player2-points').innerHTML =
-    pointsArr[player2.points];
+  if (!TIEBREAK) {
+    document.getElementById('player1-points').innerHTML =
+      pointsArr[player1.points];
+    document.getElementById('player2-points').innerHTML =
+      pointsArr[player2.points];
+  } else {
+    document.getElementById('player1-points').innerHTML = player1.points;
+    document.getElementById('player2-points').innerHTML = player2.points;
+  }
 };
 
 
@@ -166,8 +171,6 @@ document.addEventListener('keydown', function(event) {
         else if (player1.points === 0) player1.points = 0;
         else player1.points -= 1;
         writePoints();
-        document.getElementById('player1-points').innerHTML =
-          pointsArr[player1.points];
         break;
       case keyShortCuts.pgdn:
         addPointToPlayer(2);
@@ -178,8 +181,7 @@ document.addEventListener('keydown', function(event) {
         if (player2.points === 5) player2.points = 3;
         else if (player2.points === 0) player2.points = 0;
         else player2.points -= 1;
-        document.getElementById('player2-points').innerHTML =
-          pointsArr[player2.points];
+        writePoints();
         break;
       case keyShortCuts.enter:
         // enter completes the round
@@ -244,7 +246,7 @@ document.addEventListener('keydown', function(event) {
     switch (event.keyCode) {
       case keyShortCuts.home: // add point to player1 player
         player1.points += 1;
-        document.getElementById('player1-points').innerHTML = player1.points;
+        writePoints();
         if (player1.points%6 === 1 && player2.points <= player1.points-2) {
           TIEBREAK = false;
           player1.rounds[currentRounds] += 1;
@@ -268,13 +270,13 @@ document.addEventListener('keydown', function(event) {
       case keyShortCuts.pgup: // remove point from player 1
         if (player1.points > 0) {
           player1.points -= 1;
-          document.getElementById('player1-points').innerHTML = player1.points;
+          writePoints();
         }
         break;
 
       case keyShortCuts.pgdn: // add point to player2
         player2.points += 1;
-        document.getElementById('player2-points').innerHTML = player2.points;
+        writePoints();
         if (player2.points%6 === 1 && player1.points <= player2.points-2) {
           TIEBREAK = false;
           player2.rounds[currentRounds] += 1;
@@ -297,7 +299,7 @@ document.addEventListener('keydown', function(event) {
       case keyShortCuts.endbtn: // remove point from player2
         if (player2.points > 0) {
           player2.points -= 1;
-          document.getElementById('player2-points').innerHTML = player2.points;
+          writePoints();
         }
         break;
     }
