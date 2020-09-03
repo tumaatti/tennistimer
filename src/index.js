@@ -111,8 +111,7 @@ function setServer(server) {
 function resetPointsToZero() {
   player1.points = 0;
   player2.points = 0;
-  document.getElementById('player1-points').innerHTML = '0';
-  document.getElementById('player2-points').innerHTML = '0';
+  writePoints();
 }
 
 
@@ -170,10 +169,12 @@ document.addEventListener('keydown', function(event) {
       case keyShortCuts.del:
         resetPointsToZero();
         break;
+
       case keyShortCuts.home:
         addPointToPlayer(1);
         writePoints();
         break;
+
       case keyShortCuts.pgup:
         // remove point from player1 player
         if (player1.points === 5) player1.points = 3;
@@ -181,10 +182,12 @@ document.addEventListener('keydown', function(event) {
         else player1.points -= 1;
         writePoints();
         break;
+
       case keyShortCuts.pgdn:
         addPointToPlayer(2);
         writePoints();
         break;
+
       case keyShortCuts.endbtn:
         // remove point from player2 player
         if (player2.points === 5) player2.points = 3;
@@ -192,6 +195,7 @@ document.addEventListener('keydown', function(event) {
         else player2.points -= 1;
         writePoints();
         break;
+
       case keyShortCuts.enter:
         // enter completes the round
         // TODO: this could use some tidying up and maybe moved to separate function
