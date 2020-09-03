@@ -52,5 +52,7 @@ const resetClockButton = document.getElementById('reset-clock');
 
 resetClockButton.addEventListener('click', function(event) {
   document.getElementById('matchtime').innerHTML = '00:00:00';
+  clearInterval(clock);
+  clockRunning = false;
 });
 
