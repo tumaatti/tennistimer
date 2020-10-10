@@ -35,6 +35,20 @@ showMenuButton.addEventListener('click', function(event) {
   }
 });
 
+const setRounds = () => {
+  let numOfRoundsInput = Number((<HTMLInputElement>document.getElementById('rounds-input')).value);
+  let errorText = document.getElementById('round-error');
+  if (isNaN(numOfRoundsInput)) {
+    errorText.innerHTML = 'Give an integer value!';
+    return 0;
+  };
+  errorText.innerHTML = '';
+  NUM_OF_ROUNDS = numOfRoundsInput;
+  player1.fillRoundsWithZeros();
+  player2.fillRoundsWithZeros();
+  writeRounds();
+}
+
 const resetSetsButton = document.getElementById('reset-sets');
 
 resetSetsButton.addEventListener('click', function(event) {
