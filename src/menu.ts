@@ -13,17 +13,11 @@ const content =
 
 document.getElementById('how-to').innerHTML = content;
 
-document.getElementById('player1-rounds').innerHTML =
-  tidyRounds(player1.rounds);
-document.getElementById('player2-rounds').innerHTML =
-  tidyRounds(player2.rounds);
-
 const setPlayerNamesButton = document.getElementById('set-player-names');
 
-setPlayerNamesButton.addEventListener('click', function(event) {
-  // TODO: rajoitus pelaajien nimien pituudelle tai sit pitää fiksata asioita
-  player1.name = document.getElementById('player1-input').value;
-  player2.name = document.getElementById('player2-input').value;
+setPlayerNamesButton.addEventListener('click', (event: any) => {
+  player1.name = (<HTMLInputElement>document.getElementById('player1-input')).value;
+  player2.name = (<HTMLInputElement>document.getElementById('player2-input')).value;
   document.getElementById('player1-name').innerHTML = player1.name;
   document.getElementById('player2-name').innerHTML = player2.name;
   document.getElementById('player1-name-sets').innerHTML = player1.name;
@@ -44,8 +38,9 @@ showMenuButton.addEventListener('click', function(event) {
 const resetSetsButton = document.getElementById('reset-sets');
 
 resetSetsButton.addEventListener('click', function(event) {
-  document.getElementById('player1-rounds').innerHTML = tidyRounds([0, 0, 0]);
-  document.getElementById('player2-rounds').innerHTML = tidyRounds([0, 0, 0]);
+    player1.fillRoundsWithZeros();
+    player2.fillRoundsWithZeros();
+    writeRounds();
 });
 
 const resetClockButton = document.getElementById('reset-clock');
@@ -55,4 +50,3 @@ resetClockButton.addEventListener('click', function(event) {
   clearInterval(clock);
   clockRunning = false;
 });
-
