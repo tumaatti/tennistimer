@@ -152,9 +152,9 @@ body {
 
 .matchtime {
   font-size: 50px;
-  float: left;
-  padding-right: 30px;
-  padding-left: 30px;
+  float: right;
+  padding-right: 10px;
+  padding-left: 10px;
   padding-top: calc(145px - 50px - 10px - 2.5px);
   padding-bottom: 10px;
 }
@@ -177,4 +177,9 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 0px 0px 5px 0px;
+}
+
+#round-error {
+  color: red;
+  font-size: 10px;
 }

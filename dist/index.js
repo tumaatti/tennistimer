@@ -7,8 +7,8 @@ const keyCodes = {
     del: 46,
     shft: 16,
 };
-const NUM_OF_ROUNDS = 3;
 const possiblePoints = ['0', '15', '30', '40', 'AD', 'winner'];
+let NUM_OF_ROUNDS = 3;
 let tieBreakNumber = 0;
 const SETS_TO_WIN = 7;
 let TIEBREAK = false;
@@ -39,6 +39,7 @@ class Player {
             this.points -= 1;
     }
     fillRoundsWithZeros() {
+        this.rounds = [];
         for (let i = 0; i < NUM_OF_ROUNDS; i++) {
             this.rounds.push(0);
         }
