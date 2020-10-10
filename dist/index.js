@@ -7,6 +7,15 @@ const keyCodes = {
     del: 46,
     shft: 16,
 };
+const NUM_OF_ROUNDS = 3;
+const possiblePoints = ['0', '15', '30', '40', 'AD', 'winner'];
+let tieBreakNumber = 0;
+const SETS_TO_WIN = 7;
+let TIEBREAK = false;
+let clock;
+let clockRunning = false;
+let firstTime = true;
+let currentRound = 0;
 class Player {
     constructor(name, points, rounds, color, picker) {
         this.name = name;
@@ -35,24 +44,8 @@ class Player {
         }
     }
 }
-const NUM_OF_ROUNDS = 3;
-const possiblePoints = ['0', '15', '30', '40', 'AD', 'winner'];
-let tieBreakNumber = 0;
-const SETS_TO_WIN = 7;
-let TIEBREAK = false;
-let clock;
-let clockRunning = false;
-let firstTime = true;
-let currentRound = 0;
 let player1 = new Player('player1', 0, [], '#fff', '');
 let player2 = new Player('player2', 0, [], '#fff', '');
-const zpad = (str) => {
-    let a = str.trim();
-    if (a.length === 1) {
-        a = '0' + a;
-    }
-    return a;
-};
 const setServer = (server) => {
     if (server === 1) {
         document.getElementById('player1-serve').innerHTML =
@@ -202,7 +195,6 @@ document.addEventListener('keydown', (event) => {
             addPointToPlayer(2);
             break;
         case keyCodes.pgup:
-            // remove point from player1
             if (!TIEBREAK) {
                 player1.removePoint();
             }
@@ -212,7 +204,6 @@ document.addEventListener('keydown', (event) => {
             writePoints();
             break;
         case keyCodes.endbtn:
-            // remove point from player2
             if (!TIEBREAK) {
                 player2.removePoint();
             }
@@ -280,29 +271,5 @@ document.addEventListener('keydown', (event) => {
                 }
             }
             break;
-    }
-    if (event.keyCode === keyCodes.shft) {
-        if (!clockRunning) {
-            let playedTime = document.getElementById('matchtime').innerHTML;
-            const pT = playedTime.split(':');
-            const org = new Date();
-            clock = setInterval(function startClock() {
-                clockRunning = true;
-                const now = new Date();
-                const diff = now.getTime() - org.getTime();
-                const dh = Number(pT[0]) + Math.floor((diff / 1000 / 60 / 60) % 24);
-                const dm = Number(pT[1]) + Math.floor((diff / 1000 / 60) % 60);
-                const ds = Number(pT[2]) + Math.floor((diff / 1000) % 60);
-                playedTime =
-                    zpad(String(dh)) + ':' +
-                        zpad(String(dm)) + ':' +
-                        zpad(String(ds));
-                document.getElementById('matchtime').innerHTML = playedTime;
-            }, 1000);
-        }
-        else {
-            clearInterval(clock);
-            clockRunning = false;
-        }
     }
 });
