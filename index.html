@@ -12,11 +12,8 @@
         </div>
         <div class="menu" id="menu">
             <div class="player-inputs">
-                player1 name: <input type="text" id="player1-input"><br>
-                player2 name: <input type="text" id="player2-input">
-            </div>
-            <div class="set-player-names">
-                <button type="button" id="set-player-names">Change names</button><br>
+                player1 name: <input type="text" id="player1-input" onBlur="changeNames('p1')" value="player1"><br>
+                player2 name: <input type="text" id="player2-input" onBlur="changeNames('p2')" value="player2">
             </div>
             <div class="color-buttons">
                 <button type="button" id="player1-color">Player1 color</button>
