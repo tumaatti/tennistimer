@@ -10,15 +10,18 @@ const content = '<PRE>How to use the clock: <br>' +
     'Start/Stop the clock: Shift<br>' +
     'Reset Points: Del</PRE>';
 document.getElementById('how-to').innerHTML = content;
-const setPlayerNamesButton = document.getElementById('set-player-names');
-setPlayerNamesButton.addEventListener('click', (event) => {
-    player1.name = document.getElementById('player1-input').value;
-    player2.name = document.getElementById('player2-input').value;
-    document.getElementById('player1-name').innerHTML = player1.name;
-    document.getElementById('player2-name').innerHTML = player2.name;
-    document.getElementById('player1-name-sets').innerHTML = player1.name;
-    document.getElementById('player2-name-sets').innerHTML = player2.name;
-});
+const changeNames = (pnumber) => {
+    if (pnumber === 'p1') {
+        player1.name = document.getElementById('player1-input').value;
+        document.getElementById('player1-name').innerHTML = player1.name;
+        document.getElementById('player1-name-sets').innerHTML = player1.name;
+    }
+    else {
+        player2.name = document.getElementById('player2-input').value;
+        document.getElementById('player2-name').innerHTML = player2.name;
+        document.getElementById('player2-name-sets').innerHTML = player2.name;
+    }
+};
 const showMenuButton = document.getElementById('show-menu');
 showMenuButton.addEventListener('click', function (event) {
     const menu = document.getElementById('menu');
