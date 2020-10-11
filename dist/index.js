@@ -3,9 +3,9 @@ const keyCodes = {
     home: 36,
     pgup: 33,
     pgdn: 34,
-    endbtn: 35,
+    end: 35,
     del: 46,
-    shft: 16,
+    shift: 16,
 };
 const possiblePoints = ['0', '15', '30', '40', 'AD', 'winner'];
 let NUM_OF_ROUNDS = 3;
@@ -204,7 +204,7 @@ document.addEventListener('keydown', (event) => {
             }
             writePoints();
             break;
-        case keyCodes.endbtn:
+        case keyCodes.end:
             if (!TIEBREAK) {
                 player2.removePoint();
             }

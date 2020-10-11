@@ -7,7 +7,7 @@ const zpad = (str: string) => {
 }
 
 document.addEventListener('keydown', (event: any) => {
-    if (event.keyCode === keyCodes.shft) {
+    if (event.keyCode === keyCodes.shift) {
         if (!clockRunning) {
             let playedTime = document.getElementById('matchtime').innerHTML;
             const pT = playedTime.split(':');

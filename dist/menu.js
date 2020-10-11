@@ -1,14 +1,25 @@
-// insert instructions on how to use the clock
+const capitalize = (lowercaseString) => {
+    return lowercaseString.charAt(0).toUpperCase() + lowercaseString.slice(1);
+};
+const keyMappings = {
+    addP1: capitalize(Object.keys(keyCodes)[0]),
+    addP2: capitalize(Object.keys(keyCodes)[1]),
+    rmP1: capitalize(Object.keys(keyCodes)[2]),
+    rmP2: capitalize(Object.keys(keyCodes)[3]),
+    comm: capitalize(Object.keys(keyCodes)[4]),
+    clock: capitalize(Object.keys(keyCodes)[5]),
+    res: capitalize(Object.keys(keyCodes)[6]),
+};
 const content = '<PRE>How to use the clock: <br>' +
     'Add points <br>' +
-    '  Player1: Home<br>' +
-    '  Player2: Page Up <br>' +
+    `  Player1: ${keyMappings.addP1}<br>` +
+    `  Player2: ${keyMappings.addP2}<br>` +
     'Remove points <br>' +
-    '  Player1: Page Down <br>' +
-    '  Player2: End<br>' +
-    'Commit points: Enter<br>' +
-    'Start/Stop the clock: Shift<br>' +
-    'Reset Points: Del</PRE>';
+    `  Player1: ${keyMappings.rmP1}<br>` +
+    `  Player2: ${keyMappings.rmP2}<br>` +
+    `Commit points: ${keyMappings.comm}<br>` +
+    `Start/Stop the clock: ${keyMappings.clock}<br>` +
+    `Reset Points: ${keyMappings.res}</PRE>`;
 document.getElementById('how-to').innerHTML = content;
 const changeNames = (pnumber) => {
     if (pnumber === 'p1') {
