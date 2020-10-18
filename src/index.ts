@@ -12,7 +12,7 @@ let NUM_OF_ROUNDS = 3;
 let tieBreakNumber = 0;
 const SETS_TO_WIN = 7;
 let TIEBREAK = false;
-let clock;
+let clock: number;
 let clockRunning = false;
 let firstTime = true;
 let currentRound= 0;
