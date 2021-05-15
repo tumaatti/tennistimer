@@ -167,9 +167,21 @@ const writePoints = () => {
     }
 };
 const writeRounds = () => {
-    let rounds1 = player1.rounds.toString().replace(/,/g, '  |  ');
+    let tmp1 = [];
+    let tmp2 = [];
+    player1.rounds.forEach((round) => {
+        if (!isNaN(round)) {
+            tmp1.push(round);
+        }
+    });
+    player2.rounds.forEach(round => {
+        if (!isNaN(round)) {
+            tmp2.push(round);
+        }
+    });
+    let rounds1 = tmp1.toString().replace(/,/g, '  |  ');
     rounds1 = rounds1.replace(/7/g, '<span style="background-color: yellow">7</span>');
-    let rounds2 = player2.rounds.toString().replace(/,/g, '  |  ');
+    let rounds2 = tmp2.toString().replace(/,/g, '  |  ');
     rounds2 = rounds2.replace(/7/g, '<span style="background-color: yellow">7</span>');
     document.getElementById('player1-rounds').innerHTML = rounds1;
     document.getElementById('player2-rounds').innerHTML = rounds2;
